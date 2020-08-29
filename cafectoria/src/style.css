@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Quicksand';
+    src: local('Quicksand'), url(./images/Quicksand/static/Quicksand-Medium.ttf) format('truetype');
+  }
+
+
+  *{
+    font-family: 'Quicksand', sans-serif;
+  }
+
+:root{
+    --white-color : #eeeeee;
+    --green-color :#32e0c4;
+    --gray-color: #393e46;
+    --black-color: #222831;
+}
+body,html {
+    width: 100%;
+    height: 100%
+}
+#root {
+    margin-top: 50px;
+    width: 100%;
+    height: 100%;
+    background: var(--white-color)
+}
+a,p{
+    color: var(--grey-color) !important;
+    transition: 0.3s;
+    font-size: 1rem;
+}
+a:hover,p:hover{
+    font-size: 1.1rem;
+}

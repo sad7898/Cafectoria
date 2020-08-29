@@ -1,7 +1,15 @@
-
+import 'bootstrap';
 import ReactDOM from 'react-dom'
-import React, { useState, useEffect } from 'react';
-
-
-
-ReactDOM.render(<h1>Hello, server is set</h1>,document.getElementById('root'))
+import React from 'react'
+import './style.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './images/Quicksand/static/Quicksand-Medium.ttf'
+import Landing from './pages/landing.jsx'
+import Navigation from './components/nav.jsx'
+import {BrowserRouter} from 'react-router-dom';
+ReactDOM.render(
+    <BrowserRouter>
+        <Navigation/>
+        <Landing/>
+    </BrowserRouter>
+    ,document.getElementById('root'))
