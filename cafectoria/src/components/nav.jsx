@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect,useRef } from 'react';
 import {Nav,Navbar,Container} from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import StyledNavLink from './navLink.jsx'
 import Back from '../images/back.svg';
 const StyledNavbar = styled(Navbar)`
@@ -15,14 +15,20 @@ height: 25px;
 }
 `
 const Navigation = (props) => {
+    let [hasHistory,setLocation] = useState(null)
+    const history = useHistory()
+    const navigateBack = props => {
+     history.goBack()
+     console.log(history.location)
+    }
     return (
                 <StyledNavbar expand="md" fixed="top">
                     <Container>
                         <Navbar.Brand>
             
-                            <BackIcon
+                            { <BackIcon
                             className="d-inline-block align-top mr-2"
-                            src={Back}/>
+                            src={Back} onClick={navigateBack}/>}
                             CAFETORIA
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />

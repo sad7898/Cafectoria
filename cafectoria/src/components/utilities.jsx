@@ -61,6 +61,7 @@ border-top: 0;
 border-bottom: 2px solid black;
 border-left: 0;
 border-right: 0;
+padding-left: 0;
 border-radius: 0;
     &:hover,&:active,&:focus {
         background-color: transparent;

@@ -13,10 +13,10 @@ const Entry = (props) => {
                 Select an option
             </Header>
             <Wrapper className="d-flex flex-column">
-                <StyledButton outline className="mb-2" onClick={() => (history.push(`${path}/user`))}>
+                <StyledButton outline="true" className="mb-2" onClick={() => (history.push(`${path}/user`))}>
                     I want to access Cafeteria.
                 </StyledButton>
-                <StyledButton outline className="mb-2" onClick={() => (history.push(`${path}/owner`))}>
+                <StyledButton outline="true" className="mb-2" onClick={() => (history.push(`${path}/owner`))}>
                     I want to own a Cafeteria.
                 </StyledButton>
             </Wrapper>
