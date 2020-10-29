@@ -3,10 +3,10 @@ const initialState = {
     isLogged:false
 }
 export const authReducer = (state=initialState,action) => {
-    switch(action){
+    switch(action.type){
         case "SET_CURRENT_USER":
             return {
-                user: action.user,
+                user: action.data,
                 isLogged: true
             }
         case "LOG_OUT":

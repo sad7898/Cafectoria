@@ -31,9 +31,9 @@ const Main = (props) => {
        </BSWrapper>
        <BSWrapper>
         <div className="d-flex flex-row justify-content-between w-100">
-            <StyledButton size="lg">Explore more</StyledButton>
-            <StyledButton size="lg" onClick={() => (history.push('/register'))}>Join Us</StyledButton>
-            <StyledButton size="lg">Some button</StyledButton>
+            <StyledButton bg='var(--white-color)' size="lg">Explore more</StyledButton>
+            <StyledButton bg='var(--white-color)' size="lg" onClick={() => (history.push('/register'))}>Join Us</StyledButton>
+            <StyledButton bg='var(--white-color)' size="lg">Some button</StyledButton>
         </div>
         <IntroText/>
        </BSWrapper>

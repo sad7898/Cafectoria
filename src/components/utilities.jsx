@@ -4,6 +4,7 @@ import {Card,Form} from 'react-bootstrap';
 import styled from 'styled-components';
 export const Header = styled.h1`
 color : ${props => props.color};
+margin : ${props => props.mg};
 @media(max-width: 767px){
     font-size: ${props => props.sizeMobile ? props.sizeMobile : props.sizeDesktop} !important;
 }
@@ -58,15 +59,22 @@ const DemoForm = (props) => {
 export const StyledInput = styled(DemoForm)`
 background-color: transparent;
 border-top: 0;
-border-bottom: 2px solid black;
+border-bottom: 2px solid var(--white-color);
 border-left: 0;
 border-right: 0;
 padding-left: 0;
 border-radius: 0;
+transition: 0.3s;
     &:hover,&:active,&:focus {
         background-color: transparent;
         box-shadow: none;
-        border-color: var(--green-color)
+        border-color: var(--green-color);
+        color: var(--green-color);
     }
+color: var(--white-color);
 
+`
+export const StyledText = styled.span`
+color : ${props => props.color};
+font-size: ${props => props.size};
 `

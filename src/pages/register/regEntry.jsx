@@ -9,14 +9,14 @@ const Entry = (props) => {
     let {path} = useRouteMatch();
     return (
         <Wrapper>
-            <Header className="text-center py-2" sizeDesktop="1.5rem">
+            <Header className="text-center py-2" sizeDesktop="2rem" color="var(--white-color)">
                 Select an option
             </Header>
             <Wrapper className="d-flex flex-column">
-                <StyledButton outline="true" className="mb-2" onClick={() => (history.push(`${path}/user`))}>
+                <StyledButton  bg="var(--green-color)" className="mb-2" onClick={() => (history.push(`${path}/user`))}>
                     I want to access Cafeteria.
                 </StyledButton>
-                <StyledButton outline="true" className="mb-2" onClick={() => (history.push(`${path}/owner`))}>
+                <StyledButton  bg="var(--green-color)" className="mb-2" onClick={() => (history.push(`${path}/owner`))}>
                     I want to own a Cafeteria.
                 </StyledButton>
             </Wrapper>

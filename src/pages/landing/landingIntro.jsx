@@ -21,20 +21,20 @@ const IntroText = (props) => {
                 <Col xs={12} md={4} className="mb-4">
                     <IntroContent imgSrc={Icon}>
                         <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">Good food, good life</Header>
-                        <SubHeader sizeDesktop="1rem">Ramsay won't ever complain when he tries it.</SubHeader>
+                        <SubHeader sizeDesktop="1rem">Delicious food makes you brighter.</SubHeader>
                     </IntroContent>
                     
                 </Col>
                 <Col xs={12} md={4} className="mb-4"> 
                     <IntroContent imgSrc={Watch}>
-                        <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">Exquisite Speed</Header>
-                        <SubHeader sizeDesktop="1rem">It's like fast food but also healthy</SubHeader>
+                        <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">Lightning Speed</Header>
+                        <SubHeader sizeDesktop="1rem">Say goodbye to standing in queue.</SubHeader>
                     </IntroContent>
                 </Col>
                 <Col xs={12} md={4} className="mb-4">
                     <IntroContent imgSrc={Click}>
                         <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">Simple</Header>
-                        <SubHeader sizeDesktop="1rem">Even monkeys can use it</SubHeader>
+                        <SubHeader sizeDesktop="1rem">It's made for everyone!</SubHeader>
                     </IntroContent>
                     
                 </Col>

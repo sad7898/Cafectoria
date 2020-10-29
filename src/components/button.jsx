@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {Button} from 'react-bootstrap';
 export const StyledButton = styled(Button)`
-background-color: ${props => props.outline ? "transparent" : "var(--white-color)"};
-border-color: ${props => props.outline ? "var(--green-color)" : "var(--white-color)"};
+background: ${props => (props.outline ? 'transparent' : props.bg)};
+border-color: ${props => props.outline ? "var(--green-color)" : 'transparent'};
 border-radius: 90px;
 color: var(--grey-color);
 transition: 0.2s;
@@ -13,7 +13,7 @@ transition: 0.2s;
     border-color: var(--green-color) !important;
 }
 &:active{
-    background-color: var(--green-color) !important
+    background-color: var(--green-color) !important;
     color: var(--white-color) !important;
     border-color: var(--green-color) !important;
     box-shadow: 0 0 0 0.2rem rgba(141, 235, 213,0.5) !important;
