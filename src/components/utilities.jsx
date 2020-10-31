@@ -72,9 +72,31 @@ transition: 0.3s;
         color: var(--green-color);
     }
 color: var(--white-color);
-
+`
+export const BrightInput = styled(StyledInput)`
+padding: 1rem 1rem 1rem 1rem;
+border: 2px solid var(--grey-color);
+transition: 0.3s;
+    &:hover,&:active,&:focus {
+        background-color: transparent;
+        box-shadow: none;
+        border-color: var(--green-color);
+        color: var(--black-color);
+    }
+color: var(--grey-color);
 `
 export const StyledText = styled.span`
 color : ${props => props.color};
 font-size: ${props => props.size};
+`
+
+export const StyledList = styled.ul`
+& li{
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid var(--grey-color);
+}
+list-style-type: none;
+padding-left: 0;
+
 `

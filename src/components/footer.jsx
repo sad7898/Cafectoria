@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import {Wrapper} from './containers.jsx';
 import {Header} from './utilities.jsx'
 export const Footer = styled.footer`
+   position: fixed;
+   width:100%;
    margin-top: auto;
+   bottom: 0;
 `
 export const CustomFooter = (props) => {
     return (

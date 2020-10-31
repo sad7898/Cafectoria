@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect,useContext } from 'react';
 import {Spinner,Container} from 'react-bootstrap';
+import {useHistory} from 'react-router-dom';
 import StyledNavLink from './navLink.jsx'
 import {data} from './navData.jsx'
 import Exit from '../../images/exit.svg';
@@ -13,6 +14,7 @@ import Axios from 'axios';
 
 export const Sidebar = (props) => {
     let {load,setLoad} = useContext(Loading)
+    let history = useHistory()
     let token = useSelector(state => state.auth)
     let dispatch = useDispatch();
     let [inProp, setInProp] = useState(false);
@@ -21,11 +23,13 @@ export const Sidebar = (props) => {
       setInProp(false)
       await Axios.post('https://cafetoria-backend.herokuapp.com/user/signout',{},{header:{crossDomain:true},withCredentials:true})
       .then((res) => {
+        console.log('Succeed')
+        history.push('/')
         dispatch(LogOut())
-        
       })
       .catch((err) => {
-        console.log(err)
+        dispatch(LogOut())
+        history.push('/')
       })
       setLoad(false)
     }
@@ -54,14 +58,11 @@ export const Sidebar = (props) => {
                 <div>
                   {token.isLogged ? 
                   <>
-                  <li key="welc"><StyledNavLink to="/dashboard" className="styled-link">
+                  <li key="welc"><StyledNavLink to="/dashboard" className="styled-link" style={{fontSize: '16px'}}>
                     Welcome {token.user}
-                  </StyledNavLink></li>
-                  <li key="dashb">
-                  <StyledNavLink to="/dashboard" className="styled-link">
-                    Dashboard
                   </StyledNavLink>
                   </li>
+
                   </>
                   : ''}
                   {listItems}

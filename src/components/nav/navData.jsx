@@ -6,7 +6,7 @@ export const data = [
     },
     {
         name: "Forum",
-        path: '/forum'
+        path: '/forum/main'
     },
     {
         name: "About",

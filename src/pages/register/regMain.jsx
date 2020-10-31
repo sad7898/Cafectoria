@@ -10,7 +10,7 @@ const Register = (props) => {
     return (
         <EyeLevel>
             <Wrapper className="h-100 w-100 d-flex flex-column align-items-center  px-3">
-                    <DecoratedBlock maxw='600'>
+                    <DecoratedBlock shadow maxw='600'>
                         <Switch>
                             <Route path={`${path}/owner`} component={OwnerReg}/>
                             <Route path={`${path}/user`}>

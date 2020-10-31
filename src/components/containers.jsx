@@ -2,7 +2,7 @@ import {Container} from 'react-bootstrap';
 import styled from 'styled-components';
 export const BSWrapper = styled(Container)`
     width: 100%;
-    height: 100%;
+    height: auto;
     min-height: ${props => props.minh}px;
     max-height: ${props => props.maxh}px;
     max-width: ${props => props.maxw}px;
@@ -19,12 +19,12 @@ export const BSWrapper = styled(Container)`
     border-left : ${props => props.borderleft};
 `
 export const Wrapper = styled.div`
-    width: 100%;
+    width: ${props => props.width ? props.width : '100%'}
     height: auto;
     min-height: ${props => props.minh}px;
     max-height: ${props => props.maxh}px;
     max-width: ${props => props.maxw}px;
-    min-wdith ${props => props.minw}px;
+    min-width ${props => props.minw}px;
     background: ${props => props.bg};
     margin: ${props => props.mg};
     padding: ${props => props.pd};
@@ -39,10 +39,10 @@ export const DecoratedBlock = styled.div`
     max-height: ${props => props.maxh}px;
     max-width: ${props => props.maxw}px;
     min-wdith ${props => props.minw}px;
-    background: var(--grey-color);
+    background: ${props => props.bg ? props.bg : 'var(--grey-color)'};
     border-radius: 10px;
-    box-shadow: 10px 10px 5px rgba(71,71,71,0.5);
-    padding: 1.5rem 1.5rem 1.5rem 1.5rem;   
+    box-shadow: ${props => props.shadow ? "10px 10px 5px rgba(71,71,71,0.5)" : "none"};
+    padding: ${props => props.pd ? props.pd : "1.5rem 1.5rem 1.5rem 1.5rem" };   
 `
 
 export const EyeLevel = styled.div`

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import {Container,Button} from 'react-bootstrap'
 import {CSSTransition} from 'react-transition-group';
 import {useHistory} from 'react-router-dom';
 import wallpaper from '../../images/mainWall.jpg'
@@ -8,7 +6,9 @@ import {BSWrapper,Wrapper} from '../../components/containers.jsx'
 import {StyledButton} from '../../components/button.jsx';
 import IntroText from './landingIntro.jsx'
 import {Header,SubHeader} from '../../components/utilities.jsx';
+import {useSelector,useDispatch} from 'react-redux';
 const Main = (props) => {
+    let auth = useSelector(state=>state.auth)
     let [inProp,setInProp] = useState(false);
     let history = useHistory();
     useEffect(()=> {
@@ -32,7 +32,8 @@ const Main = (props) => {
        <BSWrapper>
         <div className="d-flex flex-row justify-content-between w-100">
             <StyledButton bg='var(--white-color)' size="lg">Explore more</StyledButton>
-            <StyledButton bg='var(--white-color)' size="lg" onClick={() => (history.push('/register'))}>Join Us</StyledButton>
+            { auth.isLogged ? <StyledButton bg='var(--white-color)' size="lg" onClick={() => (history.push('/dashboard'))}>Dashboard</StyledButton> :
+            <StyledButton bg='var(--white-color)' size="lg" onClick={() => (history.push('/register'))}>Join Us</StyledButton>}
             <StyledButton bg='var(--white-color)' size="lg">Some button</StyledButton>
         </div>
         <IntroText/>
