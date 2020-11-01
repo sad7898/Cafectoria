@@ -7,6 +7,7 @@ import {Row,Col,Table,Pagination} from 'react-bootstrap';
 import styled from 'styled-components';
 import Post from './post.jsx';
 import {Loading} from '../../pages/Bundle.jsx';
+import Refresh from '../../images/refresh.png';
 const StyledRow = styled.tr`
 & td:last-of-type{
     display: flex;
@@ -21,6 +22,16 @@ const ForumBody = (props) => {
     let {path,url} = useRouteMatch()
     let history = useHistory();
     let [postList,setPostList] = useState([]);
+    async function reloadContent(){
+        setLoad(true)
+        await Axios.get(props.path,{crossDomain:true,withCredentials:true})
+        .then((res) => {
+            console.log(res)
+            setPostList(res.data)
+        })
+        .catch((err) => console.log(err))
+        setLoad(false)
+    }
     useEffect(() => {
         async function loadContent(){
         setLoad(true)
@@ -41,6 +52,9 @@ const ForumBody = (props) => {
         <Post/>
     </Route>
     <Route path={path} exact>
+        <Wrapper className="d-flex flex-row justify-content-end align-content-center">
+            <img src={Refresh} onClick={reloadContent} />
+        </Wrapper>
         <Table striped borderless hover>
         <thead>
             <StyledRow>
