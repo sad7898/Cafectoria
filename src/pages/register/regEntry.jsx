@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import {BSWrapper,Wrapper} from '../../components/containers.jsx';
+import React from 'react';
+import {Wrapper} from '../../components/containers.jsx';
 import {StyledButton} from '../../components/button.jsx';
 import {useHistory,useRouteMatch} from 'react-router-dom';
 import {Header} from '../../components/utilities.jsx'
-import styled from 'styled-components';
 const Entry = (props) => {
     let history = useHistory()
     let {path} = useRouteMatch();

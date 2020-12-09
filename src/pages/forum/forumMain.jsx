@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import {Container,Breadcrumb} from 'react-bootstrap'
-import {Wrapper,EyeLevel,DecoratedBlock} from '../../components/containers.jsx'
+import React from 'react';
+import {Container} from 'react-bootstrap'
+import {EyeLevel,DecoratedBlock} from '../../components/containers.jsx'
 import {Switch,Route,useRouteMatch} from 'react-router-dom';
 import PrivateRoute from '../../components/privateRoute.jsx';
 import ForumHead from './forumHead.jsx';
 import ForumBody from './forumBody.jsx';
-import Post from './post.jsx';
+
 import PostForm from './postForm.jsx';
 import styled from 'styled-components';
 const DynamicBlock = styled(DecoratedBlock)`

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {Breadcrumb} from 'react-bootstrap'
-import {Wrapper,DecoratedBlock} from '../../components/containers.jsx'
+import React from 'react';
+
+import {Wrapper} from '../../components/containers.jsx'
 import {useHistory} from 'react-router-dom';
 import {Header} from '../../components/utilities.jsx';
 import StyledNavLink from '../../components/nav/navLink.jsx';

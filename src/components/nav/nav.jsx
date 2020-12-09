@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import React, { useState, useEffect,useContext } from 'react';
-import {Spinner,Container} from 'react-bootstrap';
+
+import React, { useState,useContext } from 'react';
+import {Spinner} from 'react-bootstrap';
 import {useHistory} from 'react-router-dom';
 import StyledNavLink from './navLink.jsx'
 import {data} from './navData.jsx'
@@ -45,7 +45,7 @@ export const Sidebar = (props) => {
           <img src={Toggler} onClick={() => setInProp(true)} />
           <h1 className="d-flex flex-row justify-content-center w-100" size="1.5rem">
           <Spinner animation='border' variant='dark' className="mr-2" style={{display: load ? 'block' : 'none'}}/>
-            CAFETORIA
+            ALL TALK
           </h1>
         </div>
         <CSSTransition in={inProp} timeout={300} classNames='fade'>

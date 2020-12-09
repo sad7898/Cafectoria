@@ -1,64 +1,52 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState,useContext } from 'react';
 import {Header,StyledInput} from '../../components/utilities.jsx';
 import {Wrapper} from '../../components/containers.jsx';
 import {StyledButton} from '../../components/button.jsx';
-import {Form} from 'react-bootstrap';
+import { Formik, Form } from 'formik';
+import {Form as StyleForm} from 'react-bootstrap'
 import {StyledText} from '../../components/utilities.jsx';
-import {errorObj} from './error.jsx';
 import Axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import {Loading} from '../../pages/Bundle.jsx';
 const Reg = (props) => {
     let {load,setLoad} = useContext(Loading);
-    async function handleSubmit() {
-        if (!(userError && pwError)){
-            setLoad(true);
-            await Axios.post(props.path,{'user': user,'password':password,'email':email,'secret': props.secret})
-            .then((res) => {
-                console.log('succeeded')
-                history.push('/')
-            })
-            .catch(err => {
-                console.log(err.response.data)
-                setUserError(err.response.data[Object.keys(err.response.data)[0]])
-            })
-            setLoad(false);
-        }
-    }
-    const onChangeUser = (e) => {
+    let {error,setError} = useState()
+    const validateUser = (e) => {
         let re = /^[A-Z][a-z0-9_]+$/
-        if (!re.test(e.target.value)){
-            setUserError(errorObj.invalidInput.user)
+        let error;
+        if (!e) error="Required"
+        else if (re.test(e)){
+            error = "Invalid Username"
         }
-        else if (e.target.value.length < 6 || e.target.value.length > 12){
-            setUserError(errorObj.invalidLength.user)
+        else if (e.length < 6 || e.length > 12){
+            error = "Invalid Length"
         }
-        else {
-            setUserError('');
-        }
-        setUser(e.target.value);
+        return error
     }
     
-    const onChangePassword = (e) => {
+    const validatePassword = (e) => {
         let re = /^[a-z0-9_]+$/
-        if (!re.test(e.target.value)){
-            setPwError(errorObj.invalidInput.password)
+        let error;
+        if (!e) error="Required"
+        else if (!re.test(e)){
+            error = "Invalid Password"
         }
-        else if (e.target.value.length < 6 || e.target.value.length > 12){
-            setPwError(errorObj.invalidLength.password)
+        else if (e.length < 6 || e.length > 12){
+            error = "Invalid Length"
         }
-        else {setPwError('')}
-        setPassword(e.target.value);
+        return error
     }
-    const onChangeEmail = (e) => {
-        setEmail(e.target.value);
+    const validateEmail = (e) => {
+        let error;
+        if (!e) {
+          error = 'Required';
+        } 
+        else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(e)) {
+          error = 'Invalid email address';
+        }
+        return error;
     }
     let history = useHistory();
-    let [user,setUser] = useState('');
-    let [password,setPassword] = useState('');
-    let [email,setEmail] = useState('');
-    let [userError,setUserError] = useState('');
-    let [pwError,setPwError] = useState('');
     return (
         <Wrapper>
             <Wrapper mg="0 0 20px 0">
@@ -66,43 +54,59 @@ const Reg = (props) => {
                     Sign Up
                 </Header>
             </Wrapper>
-            <Form>
-                <Form.Group controlId="username">
-                    <Form.Label>
+            <Formik
+            initialValues={{email:'',user:'',password:''}}
+            onSubmit= {async (values,{setSubmitting}) => {
+                setLoad(true)
+                await Axios.post(props.path,{'user': values.user,'password':values.password,'email':values.email,'secret': props.secret})
+                .then((res) => {
+                    history.push('/login')
+                })
+                .catch((err) => {
+                    console.log(err)
+                    setError(err.response.data[Object.keys(err.response.data)[0]])
+                    setLoad(false)
+                })
+                setLoad(false)
+                setSubmitting(false);
+            }}
+            >
+                {({errors, touched, isSubmitting}) =>  (
+                <Form>
+                <StyleForm.Group >
+                    <StyleForm.Label>
                         <StyledText color="var(--white-color)">Username</StyledText>
-                    </Form.Label>
-                        <StyledInput type="text" placeholder="Username" name="user" value={user} onChange={onChangeUser} required />
-                        <Form.Text className="text-muted">
+                    </StyleForm.Label>
+                        <StyledInput type="text"   placeholder="Username" name="user" validate={validateUser} />
+                        <StyleForm.Text className="text-muted">
                             Username must contain atleast 6 characters and not contain special character and not exceed 12.
-                        </Form.Text>
-                        <StyledText size='80%' color='red'>
-                            {userError}
-                        </StyledText>
-                </Form.Group>
-                <Form.Group controlId="password">
-                    <Form.Label>
+                        </StyleForm.Text>
+                        {errors.user && touched.user && <StyledText color='red'>{errors.user}</StyledText>}
+                </StyleForm.Group>
+                <StyleForm.Group >
+                    <StyleForm.Label>
                         <StyledText color="var(--white-color)">Password</StyledText>
-                    </Form.Label>
-                        <StyledInput type="password" placeholder="Password" name="password" value={password} onChange={onChangePassword} required />
-                        <Form.Text className="text-muted">
+                    </StyleForm.Label>
+                        <StyledInput   type="password" placeholder="Password" name="password" validate={validatePassword} />
+                        <StyleForm.Text className="text-muted">
                             Password must contain atleast 6 characters and not exceed 12.
-                        </Form.Text>
-                        <StyledText size='80%' color='red'>
-                            {pwError}
-                        </StyledText>
-                </Form.Group>
-                <Form.Group controlId="email">
-                    <Form.Label>
+                        </StyleForm.Text>
+                        {errors.password && touched.password && <StyledText color='red'>{errors.password}</StyledText>}
+                </StyleForm.Group>
+                <StyleForm.Group controlId="email">
+                    <StyleForm.Label>
                         <StyledText color="var(--white-color)">Email</StyledText>
-                    </Form.Label>
-                        <StyledInput type="email" placeholder="someone@domain.com" name="email" value={email} onChange={onChangeEmail} required />
-                        <Form.Text className="text-muted">
-                            Enter valid email
-                        </Form.Text>
-                </Form.Group>
-                {props.children}
-                <StyledButton bg="var(--green-color)" onClick={handleSubmit}>Submit</StyledButton>
-            </Form>
+                    </StyleForm.Label>
+                    <StyledInput type="email"   placeholder="someone@domain.com" name="email" validate={validateEmail} />
+                    {errors.email && touched.email && <StyledText color='red'>{errors.email}</StyledText>}
+                </StyleForm.Group>
+                <StyledButton bg="var(--green-color)" type='submit' disabled={isSubmitting}>Submit</StyledButton>
+                </Form>
+                )}
+            </Formik>
+            <StyledText color='red'>
+                    {error}
+            </StyledText>
         </Wrapper>
     )
 }

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect} from 'react';
 import Main from './landing/landingMain.jsx';
 import Register from './register/regMain.jsx';
 import Login from './login/loginMain.jsx';
 import Forum from './forum/forumMain.jsx';
-import {Route,Switch,Link} from 'react-router-dom';
+import {Route,Switch} from 'react-router-dom';
 import {Wrapper} from '../components/containers.jsx';
 import {Sidebar} from '../components/nav/nav.jsx';
 import {CustomFooter} from '../components/footer.jsx'
 import {useDispatch,useSelector} from 'react-redux'
-import {LogOut,setCurrentUser} from '../store/actions/userActions.js';
+import {setCurrentUser} from '../store/actions/userActions.js';
 
 import Axios from 'axios';
 export let Loading = React.createContext({

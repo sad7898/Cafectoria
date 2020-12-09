@@ -1,10 +1,9 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState} from 'react';
 import {Form} from 'react-bootstrap';
-import {BrightInput,StyledText,Header} from '../../components/utilities.jsx'
+import {BrightInput,StyledText} from '../../components/utilities.jsx'
 import {Wrapper} from '../../components/containers.jsx';
 import {StyledButton} from '../../components/button.jsx';
 import {useHistory} from 'react-router-dom';
-import styled from 'styled-components';
 import Axios from 'axios';
 const PostForm = (props) => {
     let history = useHistory()
@@ -22,7 +21,7 @@ const PostForm = (props) => {
         await Axios.post('https://cafetoria-backend.herokuapp.com/post',{'postTopic': topic,'postText':text},{crossDomain:true,withCredentials:true})
         .then((res) => {
             console.log(res)
-            history.push('/');
+            history.push('/forum');
         })
         .catch(err => {
             console.log(err.response.data)

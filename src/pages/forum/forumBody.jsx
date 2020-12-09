@@ -1,9 +1,8 @@
 import Axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import {Wrapper} from '../../components/containers';
-import {StyledList} from '../../components/utilities'
 import {Link,useHistory,useRouteMatch,Switch,Route} from 'react-router-dom';
-import {Row,Col,Table,Pagination} from 'react-bootstrap';
+import {Table} from 'react-bootstrap';
 import styled from 'styled-components';
 import Post from './post.jsx';
 import {Loading} from '../../pages/Bundle.jsx';
@@ -20,7 +19,6 @@ const StyledRow = styled.tr`
 const ForumBody = (props) => {
     let {load,setLoad} = useContext(Loading);
     let {path,url} = useRouteMatch()
-    let history = useHistory();
     let [postList,setPostList] = useState([]);
     async function reloadContent(){
         setLoad(true)

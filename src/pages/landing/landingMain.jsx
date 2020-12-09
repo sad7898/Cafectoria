@@ -6,7 +6,7 @@ import {BSWrapper,Wrapper} from '../../components/containers.jsx'
 import {StyledButton} from '../../components/button.jsx';
 import IntroText from './landingIntro.jsx'
 import {Header,SubHeader} from '../../components/utilities.jsx';
-import {useSelector,useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 const Main = (props) => {
     let auth = useSelector(state=>state.auth)
     let [inProp,setInProp] = useState(false);
@@ -20,11 +20,11 @@ const Main = (props) => {
            <CSSTransition in={inProp} timeout={500} classNames="fade-down">
             <Wrapper className="w-100 d-flex flex-column align-items-center justify-content-center">
                 <Header color="var(--white-color)">
-                    CAFETERIA
+                    ALL TALK
                 </Header>
                 <hr></hr>
                 <SubHeader color="var(--white-color)">
-                    Some Cool Phrase
+                    Inert cool phrase
                 </SubHeader>
             </Wrapper>
            </CSSTransition>

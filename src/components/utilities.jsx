@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import {Card,Form} from 'react-bootstrap';
+import React, {useEffect}from 'react';
+import {Card} from 'react-bootstrap';
+import {Field,useField} from 'formik'
+import {Form as StyleForm} from 'react-bootstrap'
 
 import styled from 'styled-components';
 export const Header = styled.h1`
@@ -52,16 +54,23 @@ min-height: ${props => props.minH};
 `
 const DemoForm = (props) => {
     return(
-    <Form.Control {...props}/>
+    <Field {...props}/>
     )
 }
 
 export const StyledInput = styled(DemoForm)`
+
+font-size: 1rem;
+height: calc(1.5em + .75rem + 2px);
+display: block;
+width: 100%;
+padding: .375rem .75rem;
 background-color: transparent;
 border-top: 0;
 border-bottom: 2px solid var(--white-color);
 border-left: 0;
 border-right: 0;
+outline: 0;
 padding-left: 0;
 border-radius: 0;
 transition: 0.3s;
@@ -73,6 +82,23 @@ transition: 0.3s;
     }
 color: var(--white-color);
 `
+export const InputField = ({label,...props}) => {
+    const [field,meta,helpers] = useField(props)
+    useEffect(() => {
+        console.log()
+    },[])
+    return (
+        <>
+        <StyleForm.Group>
+            <StyleForm.Label>
+                <StyledText color="var(--white-color)">{label}</StyledText>
+            </StyleForm.Label>
+            <StyledInput {...field} {...props}  required/>
+            {meta.touch && meta.error ? <StyledText color='red'>{meta.error}</StyledText> : null}
+        </StyleForm.Group>
+        </>
+    )
+}
 export const BrightInput = styled(StyledInput)`
 padding: 1rem 1rem 1rem 1rem;
 border: 2px solid var(--grey-color);
