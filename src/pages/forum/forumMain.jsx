@@ -5,7 +5,7 @@ import {Switch,Route,useRouteMatch} from 'react-router-dom';
 import PrivateRoute from '../../components/privateRoute.jsx';
 import ForumHead from './forumHead.jsx';
 import ForumBody from './forumBody.jsx';
-
+import Filter from './filter'
 import PostForm from './postForm.jsx';
 import styled from 'styled-components';
 const DynamicBlock = styled(DecoratedBlock)`
@@ -23,20 +23,18 @@ const Forum = () => {
             <DynamicBlock bg="white" shadow>
                 <ForumHead/>
                 <Switch>
-                    <PrivateRoute path={`${path}/new`}>
+                    <Route path={`${path}/new`}>
                         <PostForm/>
-                    </PrivateRoute>
-                    <Route path={`${path}/bugs`}  render={() => {
-                        return(
-                            <ForumBody path="https://cafetoria-backend.herokuapp.com/api/post"/>
-                        )
-                    }}/> 
+                    </Route>
                     <Route path={`${path}/main`} render={() => {
                         
                         return(
                             <ForumBody path="https://cafetoria-backend.herokuapp.com/api/post"/>
                         )
                     }}/>
+                    <Route path={`${path}/filter`}>
+                        <Filter></Filter>
+                    </Route>
                 </Switch>
                 </DynamicBlock>
             </EyeLevel>

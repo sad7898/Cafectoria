@@ -1,8 +1,8 @@
 import React, {useEffect}from 'react';
 import {Card} from 'react-bootstrap';
 import {Field,useField} from 'formik'
-import {Form as StyleForm} from 'react-bootstrap'
-
+import {Form as StyleForm, Badge} from 'react-bootstrap'
+import {useHistory} from 'react-router-dom'
 import styled from 'styled-components';
 export const Header = styled.h1`
 color : ${props => props.color};
@@ -99,7 +99,33 @@ export const InputField = ({label,...props}) => {
         </>
     )
 }
-export const BrightInput = styled(StyledInput)`
+const BootstrapForm = (props) => {
+    return (
+        <StyleForm.Control {...props}></StyleForm.Control>
+    )
+}
+export const BrightInput = styled(BootstrapForm)`
+font-size: 1rem;
+height: auto
+display: block;
+width: 100%;
+padding: .375rem .75rem;
+background-color: transparent;
+border-top: 0;
+border-bottom: 2px solid var(--white-color);
+border-left: 0;
+border-right: 0;
+outline: 0;
+padding-left: 0;
+border-radius: 0;
+transition: 0.3s;
+    &:hover,&:active,&:focus {
+        background-color: transparent;
+        box-shadow: none;
+        border-color: var(--green-color);
+        color: var(--green-color);
+    }
+color: var(--white-color);
 padding: 1rem 1rem 1rem 1rem;
 border: 2px solid var(--grey-color);
 transition: 0.3s;
@@ -125,4 +151,34 @@ export const StyledList = styled.ul`
 list-style-type: none;
 padding-left: 0;
 
+`
+export const CustomTag = (props) => {
+    let history = useHistory()
+    function filterByTag(){
+        history.push('/forum/main',{
+            'title': '',
+            'tags': [props.tag]
+        })
+    }
+    return (
+        <StyledTag onClick={filterByTag}>
+            {props.tag}
+        </StyledTag>
+    )
+}
+export const StyledTag = styled(Badge)`
+background-color: var(--green-color);
+margin-right: 0.5rem;
+&:hover{
+    background-color: #f56a79;
+}
+`
+
+
+export const StyledRow = styled.tr`
+& td:last-of-type{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
 `

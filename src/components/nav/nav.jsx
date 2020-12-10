@@ -45,7 +45,7 @@ export const Sidebar = (props) => {
           <img src={Toggler} onClick={() => setInProp(true)} />
           <h1 className="d-flex flex-row justify-content-center w-100" size="1.5rem">
           <Spinner animation='border' variant='dark' className="mr-2" style={{display: load ? 'block' : 'none'}}/>
-            ALL TALK
+            CAFETORIA
           </h1>
         </div>
         <CSSTransition in={inProp} timeout={300} classNames='fade'>

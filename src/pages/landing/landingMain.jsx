@@ -20,11 +20,11 @@ const Main = (props) => {
            <CSSTransition in={inProp} timeout={500} classNames="fade-down">
             <Wrapper className="w-100 d-flex flex-column align-items-center justify-content-center">
                 <Header color="var(--white-color)">
-                    ALL TALK
+                    CAFETORIA
                 </Header>
                 <hr></hr>
                 <SubHeader color="var(--white-color)">
-                    Inert cool phrase
+                    Make your recipe
                 </SubHeader>
             </Wrapper>
            </CSSTransition>

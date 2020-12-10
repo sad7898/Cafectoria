@@ -5,15 +5,19 @@ import {Wrapper} from '../../components/containers.jsx';
 import {StyledButton} from '../../components/button.jsx';
 import {useHistory} from 'react-router-dom';
 import Axios from 'axios';
-const PostForm = (props) => {
+const Filter = (props) => {
     let history = useHistory()
-    let [text,setText] = useState('')
     let [topic,setTopic] = useState('')
     let [error,setError] = useState('')
     let [tags,setTags] = useState([])
-    const onChangeText = (e) => {
-        setText(e.target.value)
+
+    async function handleSubmit() {
+        history.push('/forum/main',{
+            'tags':tags,
+            'topic':topic
+        });
     }
+ 
     const onChangeTopic = (e) => {
         setTopic(e.target.value)
     }
@@ -28,21 +32,8 @@ const PostForm = (props) => {
         const indx = tempArr.indexOf(e.target.innerHTML)
         if (indx > -1) tempArr.splice(indx,1)
         setTags(tempArr)
-
     }
-    async function handleSubmit() {
-        console.log('for now')
-        await Axios.post('https://cafetoria-backend.herokuapp.com/post',{'postTopic': topic,'postText':text,'tags':tags},{crossDomain:true,withCredentials:true})
-        .then((res) => {
-            console.log(res)
-            history.push('/forum');
-        })
-        .catch(err => {
-            console.log(err.response.data)
-            setError(err.response.data[Object.keys(err.response.data)[0]])
-        })
-    }
-     return(
+    return (
         <Wrapper bg="#dedede" rborder="10px" pd="1rem 1rem 1rem 1rem" mg="1rem auto auto auto">
         <Form>
         <Form.Group controlId="topic">
@@ -50,12 +41,6 @@ const PostForm = (props) => {
                 <StyledText>Topic</StyledText>
             </Form.Label>
                 <BrightInput type="text" placeholder="Enter Topic" name="topic" value={topic} onChange={onChangeTopic} required />
-        </Form.Group>
-        <Form.Group controlId="text" className="d-flex flex-column">
-            <Form.Label>
-                <StyledText>Content</StyledText>
-            </Form.Label>
-                <BrightInput type="text" as="textarea" rows={3} placeholder="Enter Text" name="text" value={text} onChange={onChangeText} required />
         </Form.Group>
         <Form.Group controlId="tags" className="d-flex flex-column">
             <Form.Label>Select atleast one tag</Form.Label>
@@ -80,10 +65,10 @@ const PostForm = (props) => {
             <StyledText color='red'>{error}</StyledText>
         </div>
         <StyledButton bg="var(--green-color)" onClick={handleSubmit}>
-            Submit
+            Find
         </StyledButton>
     </Form>
     </Wrapper>
     )
 }
-export default PostForm;
+export default Filter

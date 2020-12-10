@@ -7,20 +7,24 @@ import {IntroContent} from './introContent.jsx';
 import Icon from '../../images/foodIcon.svg'
 import Watch from '../../images/stopwatch.svg'
 import Click from '../../images/click-here.svg'
-import {Pie} from 'chart.js'
+import Pie from './pie'
 import Axios from 'axios';
 const IntroText = (props) => {
-    let data = useState();
-    useEffect(() => {
-        Axios.get()
-    },[])
     return (
         <Wrapper mg="10px auto 10px auto">
             <Wrapper mg="0 0 20px 0">
                 <SubHeader className="text-center" sizeMobile="1.75rem" sizeDesktop="2rem" color="var(--grey-color)">
-                    Go and discuss your topics
+                    Explore and share recipes
+                </SubHeader>
+                <SubHeader className="text-center" sizeMobile="1.4rem" sizeDesktop="1.5rem" color="var(--grey-color)">
+                    What kind of food are people making?
                 </SubHeader>
             </Wrapper>
+            <Row>
+                <Col>
+                    <Pie />
+                </Col>
+            </Row>
             <Row>
                 <Col xs={12} md={4} className="mb-4">
                     <IntroContent imgSrc={Icon}>
