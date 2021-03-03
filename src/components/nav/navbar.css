@@ -2,7 +2,7 @@
 .sidebar{
   transition: opacity 0.5s;
   z-index: 2000;
-  padding: 80px 30px 45px 30px;
+  padding: 50px 30px 45px 30px;
   position: fixed;
   top: 0;
   min-height: 100%;
@@ -12,7 +12,8 @@
   opacity: 0;
 }
 .sidebar-menu{
-  padding: 0 0 52px 0;
+  min-height: 100%;
+  padding: 0 0 20px 0;
   margin:0;
 }
 .sidebar-menu div:nth-child(2){
@@ -25,6 +26,14 @@
   font-size: 1rem;
   font-weight: bold;
   color: var(--black-color);
+}
+@media(max-height: 600px){
+  .sidebar-menu{
+    height: 50vh;
+  }
+  .sidebar-menu li{
+    margin-bottom: 0.5rem;
+  }
 }
 .sidebar-toggler{
   z-index: 1800;

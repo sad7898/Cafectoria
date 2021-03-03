@@ -54,7 +54,7 @@ export const Sidebar = (props) => {
               <div>
                 <img src={Exit} onClick={() => setInProp(false)}></img>
               </div>
-              <ul className="sidebar-menu d-flex flex-column justify-content-between h-100 mt-5">
+              <ul className="sidebar-menu d-flex flex-column justify-content-between mt-3">
                 <div>
                   {token.isLogged ? 
                   <>
