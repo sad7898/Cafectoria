@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/Cafectoria/static/css/main.f626b969.chunk.css",
+    "main.js": "/Cafectoria/static/js/main.4efc661c.chunk.js",
+    "main.js.map": "/Cafectoria/static/js/main.4efc661c.chunk.js.map",
+    "runtime-main.js": "/Cafectoria/static/js/runtime-main.7a4f49b8.js",
+    "runtime-main.js.map": "/Cafectoria/static/js/runtime-main.7a4f49b8.js.map",
+    "static/css/2.20aa2d7b.chunk.css": "/Cafectoria/static/css/2.20aa2d7b.chunk.css",
+    "static/js/2.09a9dce5.chunk.js": "/Cafectoria/static/js/2.09a9dce5.chunk.js",
+    "static/js/2.09a9dce5.chunk.js.map": "/Cafectoria/static/js/2.09a9dce5.chunk.js.map",
+    "index.html": "/Cafectoria/index.html",
+    "static/css/2.20aa2d7b.chunk.css.map": "/Cafectoria/static/css/2.20aa2d7b.chunk.css.map",
+    "static/css/main.f626b969.chunk.css.map": "/Cafectoria/static/css/main.f626b969.chunk.css.map",
+    "static/js/2.09a9dce5.chunk.js.LICENSE.txt": "/Cafectoria/static/js/2.09a9dce5.chunk.js.LICENSE.txt",
+    "static/media/style.css": "/Cafectoria/static/media/Quicksand-Medium.74eb5c18.ttf",
+    "static/media/click-here.e24afafe.svg": "/Cafectoria/static/media/click-here.e24afafe.svg",
+    "static/media/exit.85a6b206.svg": "/Cafectoria/static/media/exit.85a6b206.svg",
+    "static/media/foodIcon.2c5f0456.svg": "/Cafectoria/static/media/foodIcon.2c5f0456.svg",
+    "static/media/hamburger.82f3ceca.svg": "/Cafectoria/static/media/hamburger.82f3ceca.svg",
+    "static/media/mainWall.fdd48f73.jpg": "/Cafectoria/static/media/mainWall.fdd48f73.jpg",
+    "static/media/stopwatch.b69c4a1f.svg": "/Cafectoria/static/media/stopwatch.b69c4a1f.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7a4f49b8.js",
+    "static/css/2.20aa2d7b.chunk.css",
+    "static/js/2.09a9dce5.chunk.js",
+    "static/css/main.f626b969.chunk.css",
+    "static/js/main.4efc661c.chunk.js"
+  ]
+}
