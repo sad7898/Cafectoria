@@ -1,21 +1,22 @@
-import 'bootstrap';
-import ReactDOM from 'react-dom'
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './style.css'
-import './images/Quicksand/static/Quicksand-Medium.ttf'
-import Bundle from './pages/Bundle.jsx'
-import {BrowserRouter} from 'react-router-dom';
-import {Provider} from 'react-redux';
-import store from './store/store.js';
+import "bootstrap";
+import ReactDOM from "react-dom";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./style.css";
+import "./images/Quicksand/static/Quicksand-Medium.ttf";
+import Bundle from "./pages/Bundle.jsx";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
+import { LoadingProvider } from "./contexts/loadingContext";
 
-const serviceWorker = require('./serviceWorker')
-serviceWorker.unregister();
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <Bundle/>
-        </BrowserRouter>
-    </Provider>
-    ,document.getElementById('root'))
-
+  <Provider store={store}>
+    <LoadingProvider>
+      <BrowserRouter>
+        <Bundle />
+      </BrowserRouter>
+    </LoadingProvider>
+  </Provider>,
+  document.getElementById("root")
+);
