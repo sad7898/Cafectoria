@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Wrapper } from "../../components/containers";
 import { Header } from "../../components/utilities";
 import { useParams, useHistory } from "react-router-dom";

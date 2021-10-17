@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Wrapper } from "../../components/containers";
 import { useHistory, useRouteMatch, Switch, Route } from "react-router-dom";
 import PostLink from "./postLink";

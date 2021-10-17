@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import StyledNavLink from "./navLink";

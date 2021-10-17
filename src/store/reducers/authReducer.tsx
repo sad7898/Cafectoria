@@ -1,4 +1,3 @@
-import { Action } from "redux";
 import { CustomAction } from "../actions/types";
 export interface AuthState {
   user: string;

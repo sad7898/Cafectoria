@@ -1,4 +1,4 @@
-import React, { HTMLProps, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import { Card } from "react-bootstrap";
 import { Field, FieldAttributes, useField } from "formik";
 import { Form as StyleForm, Badge } from "react-bootstrap";
