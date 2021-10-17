@@ -1,17 +1,21 @@
-import React, { useState, useContext } from "react";
-import { Header, StyledInput } from "../../components/utilities.jsx";
-import { Wrapper } from "../../components/containers.jsx";
-import { StyledButton } from "../../components/button.jsx";
+import React, { useState, ReactNode } from "react";
+import { Header, StyledInput } from "../../components/utilities";
+import { Wrapper } from "../../components/containers";
+import { StyledButton } from "../../components/button";
 import { Formik, Form } from "formik";
 import { Form as StyleForm } from "react-bootstrap";
-import { StyledText } from "../../components/utilities.jsx";
+import { StyledText } from "../../components/utilities";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
-import useLoading from "../../contexts/loadingContext.jsx";
-const Reg = (props) => {
+import useLoading from "../../contexts/loadingContext";
+interface RegProps {
+  secret: string;
+  children?: ReactNode;
+}
+const Reg = ({ secret }: RegProps) => {
   const { setLoading } = useLoading();
   const [error, setError] = useState();
-  const validateUser = (e) => {
+  const validateUser = (e: string) => {
     let re = /^[A-Z][a-z0-9_]+$/;
     let error;
     if (!e) error = "Required";
@@ -23,7 +27,7 @@ const Reg = (props) => {
     return error;
   };
 
-  const validatePassword = (e) => {
+  const validatePassword = (e: string) => {
     let re = /^[a-z0-9_]+$/;
     let error;
     if (!e) error = "Required";
@@ -34,7 +38,7 @@ const Reg = (props) => {
     }
     return error;
   };
-  const validateEmail = (e) => {
+  const validateEmail = (e: string) => {
     let error;
     if (!e) {
       error = "Required";
@@ -53,12 +57,15 @@ const Reg = (props) => {
         initialValues={{ email: "", user: "", password: "" }}
         onSubmit={async (values, { setSubmitting }) => {
           setLoading(true);
-          await Axios.post(props.path, {
-            user: values.user,
-            password: values.password,
-            email: values.email,
-            secret: props.secret,
-          })
+          await Axios.post(
+            "https://cafetoria-backend.herokuapp.com/user/signup",
+            {
+              user: values.user,
+              password: values.password,
+              email: values.email,
+              secret: secret,
+            }
+          )
             .then((res) => {
               history.push("/login");
             })

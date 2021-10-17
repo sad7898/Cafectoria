@@ -1,20 +1,21 @@
 import React, { useState, useContext } from "react";
 import { Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import StyledNavLink from "./navLink.jsx";
-import { data } from "./navData.jsx";
+import StyledNavLink from "./navLink";
+import { data } from "./navData";
 import Exit from "../../images/exit.svg";
 import Toggler from "../../images/hamburger.svg";
 import { CSSTransition } from "react-transition-group";
 import { useSelector, useDispatch } from "react-redux";
-import { LogOut } from "../../store/actions/userActions.js";
+import { LogOut } from "../../store/actions/userActions";
 import Axios from "axios";
-import useLoading from "../../contexts/loadingContext.jsx";
+import useLoading from "../../contexts/loadingContext";
+import { RootState } from "../../store/store";
 
 export const Sidebar = () => {
   const { isLoading, setLoading } = useLoading();
   const history = useHistory();
-  const token = useSelector((state) => state.auth);
+  const token = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [inProp, setInProp] = useState(false);
   async function handleLogOut() {
@@ -69,12 +70,8 @@ export const Sidebar = () => {
               <div>
                 {token.isLogged ? (
                   <>
-                    <li key="welc">
-                      <StyledNavLink
-                        to="/dashboard"
-                        className="styled-link"
-                        style={{ fontSize: "16px" }}
-                      >
+                    <li>
+                      <StyledNavLink to="/dashboard" size="16px">
                         Welcome {token.user}
                       </StyledNavLink>
                     </li>
@@ -87,25 +84,19 @@ export const Sidebar = () => {
               <div className="w-100">
                 <li>
                   {token.isLogged ? (
-                    <StyledNavLink
-                      to="/"
-                      className="styled-link"
-                      onClick={handleLogOut}
-                    >
+                    <StyledNavLink to="/" onClick={handleLogOut}>
                       Sign Out
                     </StyledNavLink>
                   ) : (
                     <>
                       <StyledNavLink
                         to="/login"
-                        className="styled-link"
                         onClick={() => setInProp(false)}
                       >
                         Sign In
                       </StyledNavLink>
                       <StyledNavLink
                         to="/register"
-                        className="styled-link"
                         onClick={() => setInProp(false)}
                       >
                         Sign Up

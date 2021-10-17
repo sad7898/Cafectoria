@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import { Wrapper } from "../../components/containers.jsx";
-import { Header, SubHeader } from "../../components/utilities.jsx";
-import { IntroContent } from "./introContent.jsx";
+import { Wrapper } from "../../components/containers";
+import { Header, SubHeader } from "../../components/utilities";
+import { IntroContent } from "./introContent";
 
 import Icon from "../../images/foodIcon.svg";
 import Watch from "../../images/stopwatch.svg";
 import Click from "../../images/click-here.svg";
-import Pie from "../../components/charts/pie.jsx";
+import Pie from "../../components/charts/pie";
 import Axios from "axios";
 import { ChartData } from "react-chartjs-2";
 

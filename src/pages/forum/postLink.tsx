@@ -1,7 +1,11 @@
 import React from "react";
-import { StyledRow, StyledTag } from "../../components/utilities.jsx";
+import { StyledRow, StyledTag } from "../../components/utilities";
 import { Link } from "react-router-dom";
-const PostLink = (props) => {
+import { PostProps } from "./post";
+interface PostLinkProps extends Omit<PostProps, "id"> {
+  to: string;
+}
+const PostLink = (props: PostLinkProps) => {
   return (
     <StyledRow>
       <td colSpan={3}>

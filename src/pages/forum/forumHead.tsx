@@ -1,34 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Wrapper } from "../../components/containers.jsx";
+import { Wrapper } from "../../components/containers";
 import { useHistory } from "react-router-dom";
-import { Header, StyledTag } from "../../components/utilities.jsx";
-import StyledNavLink from "../../components/nav/navLink.jsx";
+import { Header, StyledTag } from "../../components/utilities";
+import StyledNavLink from "../../components/nav/navLink";
 import styled from "styled-components";
 import AddIcon from "../../images/add.png";
+import { PostProps } from "./post";
 const StyledWrapper = styled(Wrapper)`
   border-right: 0;
 `;
-function arrayIsEqual(as, bs) {
-  if (as.length !== bs.length) return false;
-  for (var a in as) if (!bs.includes(a)) return false;
-  return true;
-}
 interface Filter {
-  title: string;
+  topic: string;
   tags: string[];
 }
 
 const ForumHead = () => {
-  const history = useHistory();
-  const [filter, setFilter] = useState<Filter>({ title: "", tags: [] });
+  const history = useHistory<PostProps>();
+  const [filter, setFilter] = useState<Filter>({ topic: "", tags: [] });
   useEffect(() => {
     setFilter((prevState) => {
-      const locState: Filter = history.location.state;
+      const locState = history.location.state;
       const locStateIsValid: boolean =
-        !!locState && !!locState.title && !!locState.tags;
+        !!locState && !!locState.topic && !!locState.tags;
       if (locStateIsValid) {
         return {
-          title: locState.title,
+          topic: locState.topic,
           tags: locState.tags,
         };
       }
@@ -48,14 +44,9 @@ const ForumHead = () => {
       >
         <Wrapper className="d-flex flex-row" minw="250">
           <StyledWrapper width="auto">
-            <StyledNavLink
-              style={{ paddingBottom: "0.5rem" }}
-              to="/forum/filter"
-            >
-              Filter
-            </StyledNavLink>
+            <StyledNavLink to="/forum/filter">Filter</StyledNavLink>
             <div className="px-2">
-              {filter.tags.length !== 0 || filter.title ? (
+              {filter.tags.length !== 0 || filter.topic ? (
                 filter.tags.map((val) => {
                   return <StyledTag key={val}>{val}</StyledTag>;
                 })

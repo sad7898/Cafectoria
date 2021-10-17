@@ -5,6 +5,12 @@ import { useParams, useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Axios from "axios";
 import useLoading from "../../contexts/loadingContext";
+export interface PostProps {
+  id?: string;
+  topic: string;
+  tags: string[];
+  author?: string;
+}
 interface PostDataProps {
   topic: string;
   text: string;
@@ -18,7 +24,7 @@ const Post = () => {
   const history = useHistory();
   const [postData, setPostData] = useState<PostDataProps>();
 
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const handleDel = async () => {
     setLoading(true);
     await Axios.delete(`https://cafetoria-backend.herokuapp.com/post/${id}`, {
@@ -72,8 +78,8 @@ const Post = () => {
       ) : (
         ""
       )}
-      <Header>{postData.topic}</Header>
-      <Wrapper>{postData.text}</Wrapper>
+      <Header>{postData?.topic}</Header>
+      <Wrapper>{postData?.text}</Wrapper>
     </Wrapper>
   );
 };

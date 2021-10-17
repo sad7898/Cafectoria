@@ -1,10 +1,30 @@
-import React, { HTMLProps } from "react";
+import React, { HTMLProps, FunctionComponent } from "react";
 import { Card } from "react-bootstrap";
-import { Field, useField } from "formik";
+import { Field, FieldAttributes, useField } from "formik";
 import { Form as StyleForm, Badge } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-export const Header = styled.h1`
+interface ResponsiveProps {
+  sizeMobile?: string;
+  sizeDesktop?: string;
+}
+interface CardProps {
+  maxH: string;
+  maxW: string;
+  minH?: string;
+  minW?: string;
+  titleColor: string;
+  titleSize: string;
+}
+interface CustomTagProps {
+  tag: string;
+}
+export const Header = styled.h1<
+  {
+    color?: string;
+    mg?: string;
+  } & ResponsiveProps
+>`
   color: ${(props) => props.color};
   margin: ${(props) => props.mg};
   @media (max-width: 767px) {
@@ -16,7 +36,7 @@ export const Header = styled.h1`
       props.sizeDesktop ? props.sizeDesktop : "3rem"} !important;
   }
 `;
-export const SubHeader = styled.h3`
+export const SubHeader = styled.h3<{ color?: string } & ResponsiveProps>`
   color: ${(props) => props.color};
 
   @media (max-width: 767px) {
@@ -28,12 +48,14 @@ export const SubHeader = styled.h3`
       props.sizeDesktop ? props.sizeDesktop : "1.75rem"} !important;
   }
 `;
-export const FluidIcon = styled.img`
+export const FluidIcon = styled.img<{ maxW: string }>`
   max-width: ${(props) => props.maxW};
   height: auto;
   margin-bottom: 30px;
 `;
-export const CustomCard = (props) => {
+export const CustomCard: FunctionComponent<
+  CardProps & { img: string; title: string }
+> = (props) => {
   return (
     <StyledCard
       maxH={props.maxH}
@@ -41,7 +63,11 @@ export const CustomCard = (props) => {
       color={props.titleColor}
       titleSize={props.titleSize}
     >
-      <StyledCard.Img className="img-fluid" src={props.img} alt={props.alt} />
+      <StyledCard.Img
+        className="img-fluid"
+        src={props.img}
+        alt={"Some image"}
+      />
       <StyledCard.ImgOverlay>
         <StyledCard.Title>{props.title}</StyledCard.Title>
         <StyledCard.Text>{props.children}</StyledCard.Text>
@@ -49,7 +75,7 @@ export const CustomCard = (props) => {
     </StyledCard>
   );
 };
-const StyledCard = styled(Card)`
+const StyledCard = styled(Card)<CardProps>`
   margin-bottom: 1rem;
   max-height: ${(props) => props.maxH};
   min-height: ${(props) => props.minH};
@@ -58,7 +84,7 @@ const StyledCard = styled(Card)`
     color: ${(props) => props.titleColor};
   }
 `;
-const DemoForm = (props) => {
+const DemoForm = (props: FieldAttributes<any>) => {
   return <Field {...props} />;
 };
 
@@ -88,8 +114,8 @@ export const StyledInput = styled(DemoForm)`
   color: var(--white-color);
 `;
 
-export const InputField = (props: HTMLProps<HTMLFormElement>) => {
-  const [field, meta] = useField(props.name);
+export const InputField = (props: any) => {
+  const [field, meta] = useField(props.name ?? "");
   return (
     <>
       <StyleForm.Group>
@@ -97,15 +123,20 @@ export const InputField = (props: HTMLProps<HTMLFormElement>) => {
           <StyledText color="var(--white-color)">{props.label}</StyledText>
         </StyleForm.Label>
         <StyledInput {...field} {...props} required />
-        {meta.touched && meta.error ? (
+        {meta.touched && meta.error && (
           <StyledText color="red">{meta.error}</StyledText>
-        ) : null}
+        )}
       </StyleForm.Group>
     </>
   );
 };
-const BootstrapForm = (props) => {
-  return <StyleForm.Control {...props}></StyleForm.Control>;
+const BootstrapForm = (props: any & { isTextArea: boolean }) => {
+  return (
+    <StyleForm.Control
+      {...props}
+      as={props.isTextArea ? "textarea" : "input"}
+    ></StyleForm.Control>
+  );
 };
 export const BrightInput = styled(BootstrapForm)`
 font-size: 1rem;
@@ -140,7 +171,7 @@ transition: 0.3s;
     }
 color: var(--grey-color);
 `;
-export const StyledText = styled.span`
+export const StyledText = styled.span<{ color?: string; size?: string }>`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
 `;
@@ -154,11 +185,11 @@ export const StyledList = styled.ul`
   list-style-type: none;
   padding-left: 0;
 `;
-export const CustomTag = (props) => {
-  let history = useHistory();
+export const CustomTag = (props: CustomTagProps) => {
+  const history = useHistory();
   function filterByTag() {
     history.push("/forum/main", {
-      title: "",
+      topic: "",
       tags: [props.tag],
     });
   }

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
-import Main from "./landing/landingMain.jsx";
-import Register from "./register/regMain.jsx";
-import Login from "./login/loginMain.jsx";
-import Forum from "./forum/forumMain.jsx";
+import Main from "./landing/landingMain";
+import Register from "./register/regMain";
+import Login from "./login/loginMain";
+import Forum from "./forum/forumMain";
 import { Route, Switch } from "react-router-dom";
-import { Wrapper } from "../components/containers.jsx";
-import { Sidebar } from "../components/nav/nav.jsx";
-import { CustomFooter } from "../components/footer.jsx";
+import { Wrapper } from "../components/containers";
+import { Sidebar } from "../components/nav/nav";
+import { CustomFooter } from "../components/footer";
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../store/actions/userActions.js";
+import { setCurrentUser } from "../store/actions/userActions";
 
 import Axios from "axios";
 

@@ -1,33 +1,29 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import {
-  BrightInput,
-  StyledText,
-  StyledTag,
-} from "../../components/utilities.jsx";
-import { Wrapper } from "../../components/containers.jsx";
-import { StyledButton } from "../../components/button.jsx";
+import { BrightInput, StyledText, StyledTag } from "../../components/utilities";
+import { Wrapper } from "../../components/containers";
+import { StyledButton } from "../../components/button";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 const PostForm = () => {
-  let history = useHistory();
-  let [text, setText] = useState("");
-  let [topic, setTopic] = useState("");
-  let [error, setError] = useState("");
-  let [tags, setTags] = useState([]);
-  const onChangeText = (e) => {
+  const history = useHistory();
+  const [text, setText] = useState("");
+  const [topic, setTopic] = useState("");
+  const [error, setError] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+  const onChangeText = (e: any) => {
     setText(e.target.value);
   };
-  const onChangeTopic = (e) => {
+  const onChangeTopic = (e: any) => {
     setTopic(e.target.value);
   };
-  const onChangeTags = (e) => {
+  const onChangeTags = (e: any) => {
     if (!tags.includes(e.target.value)) {
       let tempArr = tags.concat(e.target.value);
       setTags(tempArr);
     }
   };
-  const popTags = (e) => {
+  const popTags = (e: any) => {
     let tempArr = Array.from(tags);
     const indx = tempArr.indexOf(e.target.innerHTML);
     if (indx > -1) tempArr.splice(indx, 1);
@@ -73,7 +69,7 @@ const PostForm = () => {
           </Form.Label>
           <BrightInput
             type="text"
-            as="textarea"
+            isTextArea={true}
             rows={3}
             placeholder="Enter Text"
             name="text"

@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Form, Formik } from "formik";
 
-import { InputField, StyledText, Header } from "../../components/utilities.jsx";
-import { Wrapper } from "../../components/containers.jsx";
-import { StyledButton } from "../../components/button.jsx";
+import { InputField, StyledText, Header } from "../../components/utilities";
+import { Wrapper } from "../../components/containers";
+import { StyledButton } from "../../components/button";
 import { useHistory } from "react-router-dom";
-import { setCurrentUser } from "../../store/actions/userActions.js";
+import { setCurrentUser } from "../../store/actions/userActions";
 import { useDispatch } from "react-redux";
 import Axios from "axios";
-import useLoading from "../../contexts/loadingContext.jsx";
+import useLoading from "../../contexts/loadingContext";
 type LoginFormError = {
   user: string;
   password: string;

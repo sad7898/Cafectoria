@@ -2,24 +2,24 @@ import Axios from "axios";
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import { Wrapper } from "../../components/containers";
 import { useHistory, useRouteMatch, Switch, Route } from "react-router-dom";
-import PostLink from "./postLink.jsx";
+import PostLink from "./postLink";
 import { Table, Pagination } from "react-bootstrap";
-import Post from "./post.jsx";
-import { StyledRow } from "../../components/utilities.jsx";
+import Post, { PostProps } from "./post";
+import { StyledRow } from "../../components/utilities";
 import Refresh from "../../images/refresh.png";
 import useLoading from "../../contexts/loadingContext";
 
-const ForumBody = (props) => {
+const ForumBody = () => {
   const { setLoading } = useLoading();
-  const history = useHistory();
+  const history = useHistory<PostProps>();
   const { path } = useRouteMatch();
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
   const [pageNav, setPageNav] = useState([1]);
-  const [postList, setPostList] = useState([]);
+  const [postList, setPostList] = useState<PostProps[]>([]);
   const loadContent = useCallback(async () => {
     setLoading(true);
-    await Axios.get(`${props.path}`, {
+    await Axios.get("https://cafetoria-backend.herokuapp.com/api/post", {
       withCredentials: true,
       params: {
         p: page - 1,
@@ -51,7 +51,7 @@ const ForumBody = (props) => {
       setPageNav(arr);
     });
     setLoading(false);
-  }, [history.location.state, page, props.path, setLoading]);
+  }, [history.location.state, page, setLoading]);
   function jumpUp() {
     let currentPage = page;
     setPage(5 * Math.ceil(currentPage / 5) + 1);
