@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import store from './store/store.js';
 
 const serviceWorker = require('./serviceWorker')
-serviceWorker.register();
+serviceWorker.unregister();
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
