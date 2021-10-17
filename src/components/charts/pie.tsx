@@ -5,7 +5,7 @@ interface PieChartProps {
   data: ChartData<any>;
 }
 
-const Pie = ({ data }) => {
+const Pie = ({ data }: PieChartProps) => {
   return <Doughnut data={data} />;
 };
 
