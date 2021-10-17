@@ -1,7 +1,6 @@
 import 'bootstrap';
 import ReactDOM from 'react-dom'
 import React from 'react'
-import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css'
 import './images/Quicksand/static/Quicksand-Medium.ttf'

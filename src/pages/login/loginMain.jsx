@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import LoginForm from './loginForm.jsx'
 import {DecoratedBlock,Wrapper,EyeLevel} from '../../components/containers.jsx';
 const Login = () => {

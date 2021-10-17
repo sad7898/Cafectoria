@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {Row,Col} from 'react-bootstrap';
 import {Wrapper} from '../../components/containers.jsx'
 import {Header,SubHeader} from '../../components/utilities.jsx'
@@ -8,7 +8,7 @@ import Icon from '../../images/foodIcon.svg'
 import Watch from '../../images/stopwatch.svg'
 import Click from '../../images/click-here.svg'
 import Pie from './pie'
-import Axios from 'axios';
+
 const IntroText = (props) => {
     return (
         <Wrapper mg="10px auto 10px auto">

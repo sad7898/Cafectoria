@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {Header,StyledInput} from '../../components/utilities.jsx';
-import {Wrapper} from '../../components/containers.jsx';
-import {GreenButton} from '../../components/button.jsx';
+import React, { useState } from 'react';
+import {StyledInput} from '../../components/utilities.jsx';
+
 import {Form} from 'react-bootstrap';
 import Reg from './regForm.jsx';
 import {StyledText} from '../../components/utilities.jsx';

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {Wrapper} from '../../components/containers.jsx';
-import {FluidIcon,SubHeader} from '../../components/utilities.jsx';
+import {FluidIcon} from '../../components/utilities.jsx';
 export const IntroContent = (props) => {
     return (
         <Wrapper>
