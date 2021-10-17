@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import Main from './landing/landingMain.jsx';
 import Register from './register/regMain.jsx';
 import Login from './login/loginMain.jsx';
@@ -16,30 +16,18 @@ export let Loading = React.createContext({
     setLoading: () => {}
 });
 const Bundle = (props) => {
-    let auth = useSelector(state => state.auth)
     let dispatch = useDispatch()
     let [load,setLoad] = useState(false);
     const value = {load,setLoad}
-    const verify = () => {
+    const verify = useCallback(() => {
         Axios.get('https://cafetoria-backend.herokuapp.com/user/verify', {withCredentials: true})
         .then((res) => {
-            console.log(res)
             dispatch(setCurrentUser(res.data.user))
         })
-        .catch(err => {
-            console.log(err.response)
-        })
-    }
+    },[dispatch])
     useEffect(() => {
-        Axios.get('https://cafetoria-backend.herokuapp.com/user/verify', {crossDomain:true,withCredentials:true})
-        .then((res) => {
-            console.log(res)
-            dispatch(setCurrentUser(res.data.user))
-        })
-        .catch(err => {
-            console.log(err.response)
-        })
-    },[])
+        verify();
+    },[verify])
     return (
         <Loading.Provider value={value}>
             <Sidebar/>

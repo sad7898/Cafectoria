@@ -39,13 +39,11 @@ const LoginForm = (props) => {
             await Axios.post('https://cafetoria-backend.herokuapp.com/user/login',{'user': values.user,'password':values.password},{crossDomain:true,withCredentials:true})
             .then((res) => {
                 setLoad(false);
-                console.log(res)
                 dispatch(setCurrentUser(values.user))
                 history.push('/')
             })
             .catch(err => {
                 setLoad(false);
-                console.log(err.response.data)
                 setError(err.response.data[Object.keys(err.response.data)[0]])
             })
             setSubmitting(false)

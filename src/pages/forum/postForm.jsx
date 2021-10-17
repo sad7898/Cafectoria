@@ -31,14 +31,11 @@ const PostForm = (props) => {
 
     }
     async function handleSubmit() {
-        console.log('for now')
         await Axios.post('https://cafetoria-backend.herokuapp.com/post',{'postTopic': topic,'postText':text,'tags':tags},{crossDomain:true,withCredentials:true})
         .then((res) => {
-            console.log(res)
             history.push('/forum');
         })
         .catch(err => {
-            console.log(err.response.data)
             setError(err.response.data[Object.keys(err.response.data)[0]])
         })
     }

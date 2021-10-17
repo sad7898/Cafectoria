@@ -63,7 +63,6 @@ const Reg = (props) => {
                     history.push('/login')
                 })
                 .catch((err) => {
-                    console.log(err)
                     setError(err.response.data[Object.keys(err.response.data)[0]])
                     setLoad(false)
                 })

@@ -26,9 +26,6 @@ const Pie = (props) => {
                 data: formatData
             })
         })
-        .catch((err) => {
-            console.log('it fucking broke')
-        })
     }
     let chartRef = useRef()
     useEffect(() => {

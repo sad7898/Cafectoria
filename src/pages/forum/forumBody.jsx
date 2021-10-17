@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import {Wrapper} from '../../components/containers';
 import {Link,useHistory,useRouteMatch,Switch,Route} from 'react-router-dom';
 import PostLink from './postLink.jsx'
@@ -20,7 +20,7 @@ const ForumBody = (props) => {
     let [maxPage,setMaxPage] = useState(1)
     let [pageNav,setPageNav] = useState([1])
     let [postList,setPostList] = useState([]);
-    async function loadContent(){
+    const loadContent = useCallback(async () => {
         setLoad(true)
         await Axios.get(`${props.path}`,{crossDomain:true,withCredentials:true,params:{
             p: page-1,
@@ -28,27 +28,21 @@ const ForumBody = (props) => {
             tags: history.location.state ? (history.location.state.tags && history.location.state.tags.length!=0 ? history.location.state.tags : undefined) : undefined
         }})
         .then((res) => {
-            console.log(res)
             setMaxPage(Math.ceil(res.data.count/10))
             setPostList(res.data.post)
             let nearestFiveFloor;
-            if (page%5==0 && page!=1) nearestFiveFloor = (page-4)
+            if (page%5===0 && page!==1) nearestFiveFloor = (page-4)
             else nearestFiveFloor = (5*Math.floor((page)/5))+1
             let nearestFiveCeil = (5*Math.ceil((page)/5))
             if (nearestFiveCeil > Math.ceil(res.data.count/10)) nearestFiveCeil= Math.ceil(res.data.count/10);
             let arr=[]
-            console.log('nearestFiveFloor '+nearestFiveFloor )
-            console.log('nearestFiveCeil '+nearestFiveCeil )
             for(let i=nearestFiveFloor;i<=nearestFiveCeil;i++){
                 arr.push(i)
             }
             setPageNav(arr)
         })
-        .catch((err) => {
-            console.log(err)
-        })
         setLoad(false)
-    }
+    },[history.location.state,page,props.path,setLoad])
     function jumpUp(){
         let currentPage =page;
         setPage(5*Math.ceil(currentPage/5)+1)
@@ -56,7 +50,7 @@ const ForumBody = (props) => {
 
     function jumpDown(){
         let currentPage =page;
-        if (currentPage%5==0){
+        if (currentPage%5===0){
             setPage(5*(Math.floor(currentPage/5)-1))
         }
         else {
@@ -65,9 +59,8 @@ const ForumBody = (props) => {
     }
 
     useEffect(() => {
-        console.log('on page '+page)
         loadContent()
-    },[page])
+    },[loadContent])
 
 
     return(
@@ -103,7 +96,7 @@ const ForumBody = (props) => {
                 }
                 {
                     pageNav.map((val,indx) => {
-                     return <Pagination.Item active={page==val} key={key[indx]} onClick={() => {console.log('setPage to '+val);setPage(val)}}>{val}</Pagination.Item>
+                     return <Pagination.Item active={page==val} key={key[indx]} onClick={() => {setPage(val)}}>{val}</Pagination.Item>
                     })
                 }
                 {

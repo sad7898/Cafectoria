@@ -83,10 +83,7 @@ transition: 0.3s;
 color: var(--white-color);
 `
 export const InputField = ({label,...props}) => {
-    const [field,meta,helpers] = useField(props)
-    useEffect(() => {
-        console.log()
-    },[])
+    const [field,meta] = useField(props)
     return (
         <>
         <StyleForm.Group>

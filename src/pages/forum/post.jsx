@@ -19,7 +19,6 @@ const Post = (props) => {
             history.push('/');
         })
         .catch((err) => {
-            console.log(err)
             alert('You cannot delete post if you are not the author')
             history.push('/')
         })
@@ -30,7 +29,6 @@ const Post = (props) => {
             setLoad(true)
             await Axios.get(`https://cafetoria-backend.herokuapp.com/post/${id}`,{crossDomain:true,withCredentials:true})
             .then((res) => {
-                console.log(res)
                 if (res.data[0].isAuthor){
                     setAuthor(true);
                 }
@@ -42,7 +40,6 @@ const Post = (props) => {
                     text: res.data[0].text
                 })
             })
-            .catch(err => console.log(err))
             setLoad(false)
         }
         loadContent()

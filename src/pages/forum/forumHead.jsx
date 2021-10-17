@@ -25,7 +25,6 @@ const ForumHead = (props) => {
         })
     }
     useEffect(() => {
-        console.log('this fires')
         setFilter(prevState => {
             let locState = history.location.state
             let newTags =[]

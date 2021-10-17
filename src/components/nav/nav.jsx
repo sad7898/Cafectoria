@@ -23,7 +23,6 @@ export const Sidebar = (props) => {
       setInProp(false)
       await Axios.post('https://cafetoria-backend.herokuapp.com/user/signout',{},{header:{crossDomain:true},withCredentials:true})
       .then((res) => {
-        console.log('Succeed')
         history.push('/')
         dispatch(LogOut())
       })
