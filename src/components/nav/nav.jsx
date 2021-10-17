@@ -41,7 +41,7 @@ export const Sidebar = (props) => {
     return (
       <>
         <div className="sidebar-toggler d-flex flex-row justify-content-center">
-          <img src={Toggler} onClick={() => setInProp(true)} />
+          <img src={Toggler} onClick={() => setInProp(true)} alt="Toggler" />
           <h1 className="d-flex flex-row justify-content-center w-100" size="1.5rem">
           <Spinner animation='border' variant='dark' className="mr-2" style={{display: load ? 'block' : 'none'}}/>
             CAFETORIA
@@ -51,7 +51,7 @@ export const Sidebar = (props) => {
           <div className="sidebar">
             <nav className="w-100">
               <div>
-                <img src={Exit} onClick={() => setInProp(false)}></img>
+                <img src={Exit} onClick={() => setInProp(false)} alt="Exit"></img>
               </div>
               <ul className="sidebar-menu d-flex flex-column justify-content-between mt-3">
                 <div>

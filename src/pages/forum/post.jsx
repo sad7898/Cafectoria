@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {Wrapper,DecoratedBlock} from '../../components/containers';
-import {Header,SubHeader} from '../../components/utilities';
+import {Wrapper} from '../../components/containers';
+import {Header} from '../../components/utilities';
 import {useParams,useHistory} from 'react-router-dom'
 import {Button} from 'react-bootstrap';
 import {Loading} from '../../pages/Bundle.jsx';
 import Axios from 'axios';
 const Post = (props) => {
-    let {load,setLoad} = useContext(Loading);
+    let {setLoad} = useContext(Loading);
     let [isAuthor,setAuthor] = useState(false);
     let history = useHistory()
     let [postData,setPostData]=useState({})
@@ -43,7 +43,7 @@ const Post = (props) => {
             setLoad(false)
         }
         loadContent()
-    },[])
+    },[id,setLoad])
     return (
         <Wrapper bg="#dedede" rborder="10px" pd="1rem 1rem 1rem 1rem" mg="1rem auto auto auto">
             {isAuthor ? 

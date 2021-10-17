@@ -7,7 +7,7 @@ import {Route,Switch} from 'react-router-dom';
 import {Wrapper} from '../components/containers.jsx';
 import {Sidebar} from '../components/nav/nav.jsx';
 import {CustomFooter} from '../components/footer.jsx'
-import {useDispatch,useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {setCurrentUser} from '../store/actions/userActions.js';
 
 import Axios from 'axios';

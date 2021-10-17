@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import {Wrapper} from '../../components/containers';
-import {Link,useHistory,useRouteMatch,Switch,Route} from 'react-router-dom';
+import {useHistory,useRouteMatch,Switch,Route} from 'react-router-dom';
 import PostLink from './postLink.jsx'
 import {Table,Pagination} from 'react-bootstrap';
 import Post from './post.jsx';
@@ -13,7 +13,7 @@ import Refresh from '../../images/refresh.png';
 
 const ForumBody = (props) => {
     const key = 'abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXZY'
-    let {load,setLoad} = useContext(Loading);
+    let {setLoad} = useContext(Loading);
     let history = useHistory()
     let {path} = useRouteMatch()
     let [page,setPage] = useState(1)
@@ -25,7 +25,7 @@ const ForumBody = (props) => {
         await Axios.get(`${props.path}`,{crossDomain:true,withCredentials:true,params:{
             p: page-1,
             topic: history.location.state ? (history.location.state.topic ? history.location.state.topic : undefined) : undefined,
-            tags: history.location.state ? (history.location.state.tags && history.location.state.tags.length!=0 ? history.location.state.tags : undefined) : undefined
+            tags: history.location.state ? (history.location.state.tags && history.location.state.tags.length!==0 ? history.location.state.tags : undefined) : undefined
         }})
         .then((res) => {
             setMaxPage(Math.ceil(res.data.count/10))
@@ -71,7 +71,7 @@ const ForumBody = (props) => {
     </Route>
     <Route path={path} exact>
         <Wrapper className="d-flex flex-row justify-content-end align-content-center">
-            <img src={Refresh} onClick={loadContent} />
+            <img src={Refresh} onClick={loadContent} alt="refresh" />
         </Wrapper>
         <Table striped borderless hover>
         <thead>
@@ -96,11 +96,11 @@ const ForumBody = (props) => {
                 }
                 {
                     pageNav.map((val,indx) => {
-                     return <Pagination.Item active={page==val} key={key[indx]} onClick={() => {setPage(val)}}>{val}</Pagination.Item>
+                     return <Pagination.Item active={page===val} key={key[indx]} onClick={() => {setPage(val)}}>{val}</Pagination.Item>
                     })
                 }
                 {
-                    (page > (5*Math.floor(maxPage))) || page==maxPage || maxPage<=5 ? '': <Pagination.Ellipsis onClick={jumpUp}/>
+                    (page > (5*Math.floor(maxPage))) || page===maxPage || maxPage<=5 ? '': <Pagination.Ellipsis onClick={jumpUp}/>
                 }
                 <Pagination.Last onClick={() => setPage(maxPage)}/>
             </Pagination>

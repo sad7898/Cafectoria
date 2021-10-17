@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useEffect,useRef } from 'react';
 import Axios from 'axios'
 import Chart from 'chart.js'
 const Pie = (props) => {

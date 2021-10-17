@@ -9,7 +9,7 @@ import Axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import {Loading} from '../../pages/Bundle.jsx';
 const Reg = (props) => {
-    let {load,setLoad} = useContext(Loading);
+    let {setLoad} = useContext(Loading);
     let {error,setError} = useState()
     const validateUser = (e) => {
         let re = /^[A-Z][a-z0-9_]+$/

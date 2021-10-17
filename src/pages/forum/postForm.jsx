@@ -56,8 +56,8 @@ const PostForm = (props) => {
         </Form.Group>
         <Form.Group controlId="tags" className="d-flex flex-column">
             <Form.Label>Select atleast one tag</Form.Label>
-            <BrightInput as="select" value={tags.length==0 ? 'empty' : tags[tags.length-1]} onChange={onChangeTags}>
-                <option value='empty' style={{display: tags.length==0 ? '' : 'none'}}> </option>
+            <BrightInput as="select" value={tags.length===0 ? 'empty' : tags[tags.length-1]} onChange={onChangeTags}>
+                <option value='empty' style={{display: tags.length===0 ? '' : 'none'}}> </option>
                 <option value='meat'>Meat</option>
                 <option value='veggie'>Veggie</option>
                 <option value='carbohydrates'>Carbs</option>

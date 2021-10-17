@@ -7,13 +7,12 @@ import {StyledButton} from '../../components/button.jsx';
 import {useHistory} from 'react-router-dom';
 import {setCurrentUser} from '../../store/actions/userActions.js';
 import {Loading} from '../../pages/Bundle.jsx';
-import {useDispatch,useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import Axios from 'axios';
 
 const LoginForm = (props) => {
-    let auth = useSelector(state => state.auth)
     let dispatch =useDispatch();
-    let {load,setLoad} = useContext(Loading);
+    let {setLoad} = useContext(Loading);
     let [error,setError] = useState('');
     let history = useHistory()
     return (

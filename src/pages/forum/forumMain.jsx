@@ -2,7 +2,6 @@ import React from 'react';
 import {Container} from 'react-bootstrap'
 import {EyeLevel,DecoratedBlock} from '../../components/containers.jsx'
 import {Switch,Route,useRouteMatch} from 'react-router-dom';
-import PrivateRoute from '../../components/privateRoute.jsx';
 import ForumHead from './forumHead.jsx';
 import ForumBody from './forumBody.jsx';
 import Filter from './filter'
@@ -16,7 +15,7 @@ const DynamicBlock = styled(DecoratedBlock)`
 }
 `
 const Forum = () => {
-    let {path,url} = useRouteMatch()
+    let {path} = useRouteMatch()
     return (
         <Container>
             <EyeLevel>

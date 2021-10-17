@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import {Wrapper} from '../../components/containers.jsx'
 import {useHistory} from 'react-router-dom';
-import {Header,CustomTag,StyledTag} from '../../components/utilities.jsx';
+import {Header,StyledTag} from '../../components/utilities.jsx';
 import StyledNavLink from '../../components/nav/navLink.jsx';
 import styled from 'styled-components';
 import AddIcon from '../../images/add.png';
@@ -17,20 +17,13 @@ function eqArr(as, bs) {
 const ForumHead = (props) => {
     let history  = useHistory()
     let [filter,setFilter] = useState({'title':'','tags':[]})
-    const filterByTag = (e) => {
-        const tag = e.target.innerHTML
-        history.push('/forum/main',{
-            'title': '',
-            'tags': [tag]
-        })
-    }
     useEffect(() => {
         setFilter(prevState => {
             let locState = history.location.state
             let newTags =[]
             let changeList = {'title':false,'tags':false}
             if (locState){
-                if (locState.title != prevState.title){
+                if (locState.title !== prevState.title){
                     changeList.title = true
                 }
                 if (!eqArr(locState.tags,prevState.tags)){
@@ -53,7 +46,7 @@ const ForumHead = (props) => {
                 <StyledWrapper width='auto' >
                     <StyledNavLink style={{paddingBottom: '0.5rem'}} to='/forum/filter'>Filter</StyledNavLink>
                     <div className="px-2">
-                    {filter.tags.length!=0 || filter.tags.title ? filter.tags.map((val) => {
+                    {filter.tags.length!==0 || filter.tags.title ? filter.tags.map((val) => {
                        return ( <StyledTag key={val}>
                            {val}
                         </StyledTag> )
@@ -68,7 +61,7 @@ const ForumHead = (props) => {
 
             </Wrapper>
             <Wrapper className="d-flex flex-column justify-content-center px-2">
-                <img src={AddIcon} onClick={() => history.push('/forum/new')}/>
+                <img src={AddIcon} onClick={() => history.push('/forum/new')} alt="Add"/>
             </Wrapper>
         </Wrapper>
     </Wrapper>
