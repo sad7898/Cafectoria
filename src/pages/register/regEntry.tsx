@@ -4,8 +4,8 @@ import { StyledButton } from "../../components/button";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { Header } from "../../components/utilities";
 const Entry = () => {
-  let history = useHistory();
-  let { path } = useRouteMatch();
+  const history = useHistory();
+  const { path } = useRouteMatch();
   return (
     <Wrapper>
       <Header

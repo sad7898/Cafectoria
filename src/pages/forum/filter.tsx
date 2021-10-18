@@ -22,12 +22,12 @@ const Filter = () => {
   };
   const onChangeTags = (e: any) => {
     if (!tags.includes(e.target.value)) {
-      let tempArr = tags.concat(e.target.value);
+      const tempArr = tags.concat(e.target.value);
       setTags(tempArr);
     }
   };
   const popTags = (e: any) => {
-    let tempArr = Array.from(tags);
+    const tempArr = Array.from(tags);
     const indx = tempArr.indexOf(e.target.innerHTML);
     if (indx > -1) tempArr.splice(indx, 1);
     setTags(tempArr);

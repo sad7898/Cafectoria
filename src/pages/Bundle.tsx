@@ -13,7 +13,7 @@ import { setCurrentUser } from "../store/actions/userActions";
 import Axios from "axios";
 
 const Bundle = () => {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
   const verify = useCallback(() => {
     Axios.get("https://cafetoria-backend.herokuapp.com/user/verify", {
       withCredentials: true,
