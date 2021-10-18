@@ -1,10 +1,10 @@
 import React, { useState, ReactNode } from "react";
-import { Header, StyledInput } from "../../components/utilities";
+import { Header, StyledInput , StyledText } from "../../components/utilities";
 import { Wrapper } from "../../components/containers";
 import { StyledButton } from "../../components/button";
 import { Formik, Form } from "formik";
 import { Form as StyleForm } from "react-bootstrap";
-import { StyledText } from "../../components/utilities";
+
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import useLoading from "../../contexts/loadingContext";
@@ -16,7 +16,7 @@ const Reg = ({ secret }: RegProps) => {
   const { setLoading } = useLoading();
   const [error, setError] = useState();
   const validateUser = (e: string) => {
-    let re = /^[A-Z][a-z0-9_]+$/;
+    const re = /^[A-Z][a-z0-9_]+$/;
     let error;
     if (!e) error = "Required";
     else if (re.test(e)) {
@@ -28,7 +28,7 @@ const Reg = ({ secret }: RegProps) => {
   };
 
   const validatePassword = (e: string) => {
-    let re = /^[a-z0-9_]+$/;
+    const re = /^[a-z0-9_]+$/;
     let error;
     if (!e) error = "Required";
     else if (!re.test(e)) {
@@ -47,7 +47,7 @@ const Reg = ({ secret }: RegProps) => {
     }
     return error;
   };
-  let history = useHistory();
+  const history = useHistory();
   return (
     <Wrapper>
       <Wrapper mg="0 0 20px 0">

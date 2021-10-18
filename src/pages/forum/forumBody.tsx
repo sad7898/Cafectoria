@@ -44,7 +44,7 @@ const ForumBody = () => {
       let nearestFiveCeil = 5 * Math.ceil(page / 5);
       if (nearestFiveCeil > Math.ceil(res.data.count / 10))
         nearestFiveCeil = Math.ceil(res.data.count / 10);
-      let arr = [];
+      const arr = [];
       for (let i = nearestFiveFloor; i <= nearestFiveCeil; i++) {
         arr.push(i);
       }
@@ -53,12 +53,12 @@ const ForumBody = () => {
     setLoading(false);
   }, [history.location.state, page, setLoading]);
   function jumpUp() {
-    let currentPage = page;
+    const currentPage = page;
     setPage(5 * Math.ceil(currentPage / 5) + 1);
   }
 
   function jumpDown() {
-    let currentPage = page;
+    const currentPage = page;
     if (currentPage % 5 === 0) {
       setPage(5 * (Math.floor(currentPage / 5) - 1));
     } else {

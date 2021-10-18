@@ -1,29 +1,29 @@
-import React, { useEffect, useCallback } from "react";
-import Main from "./landing/landingMain";
-import Register from "./register/regMain";
-import Login from "./login/loginMain";
-import Forum from "./forum/forumMain";
-import { Route, Switch } from "react-router-dom";
-import { Wrapper } from "../components/containers";
-import { Sidebar } from "../components/nav/nav";
-import { CustomFooter } from "../components/footer";
-import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../store/actions/userActions";
+import React, { useEffect, useCallback } from "react"
+import Main from "./landing/landingMain"
+import Register from "./register/regMain"
+import Login from "./login/loginMain"
+import Forum from "./forum/forumMain"
+import { Route, Switch } from "react-router-dom"
+import { Wrapper } from "../components/containers"
+import { Sidebar } from "../components/nav/nav"
+import { CustomFooter } from "../components/footer"
+import { useDispatch } from "react-redux"
+import { setCurrentUser } from "../store/actions/userActions"
 
-import Axios from "axios";
+import Axios from "axios"
 
 const Bundle = () => {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch()
   const verify = useCallback(() => {
     Axios.get("https://cafetoria-backend.herokuapp.com/user/verify", {
       withCredentials: true,
     }).then((res) => {
-      dispatch(setCurrentUser(res.data.user));
-    });
-  }, [dispatch]);
+      dispatch(setCurrentUser(res.data.user))
+    })
+  }, [dispatch])
   useEffect(() => {
-    verify();
-  }, [verify]);
+    verify()
+  }, [verify])
   return (
     <>
       <Sidebar />
@@ -45,6 +45,6 @@ const Bundle = () => {
       </Wrapper>
       <CustomFooter>Blackmarble Corps. ltd</CustomFooter>
     </>
-  );
-};
-export default Bundle;
+  )
+}
+export default Bundle
