@@ -32,7 +32,7 @@ const PostForm = () => {
   async function handleSubmit() {
     await Axios.post("https://cafetoria-backend.herokuapp.com/post", { postTopic: topic, postText: text, tags: tags }, { withCredentials: true })
       .then((res) => {
-        navigate.push("/forum")
+        navigate("/forum")
       })
       .catch((err) => {
         setError(err.response.data[Object.keys(err.response.data)[0]])

@@ -34,11 +34,11 @@ const Post = () => {
       withCredentials: true,
     })
       .then((res) => {
-        navigate.push("/")
+        navigate("/")
       })
       .catch((err) => {
         alert("You cannot delete post if you are not the author")
-        navigate.push("/")
+        navigate("/")
       })
     setLoading(false)
   }

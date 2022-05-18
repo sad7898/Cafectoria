@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Wrapper } from "../../components/containers"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { Header, StyledTag } from "../../components/utilities"
 import StyledNavLink from "../../components/nav/navLink"
 import styled from "styled-components"
@@ -15,21 +15,22 @@ interface Filter {
 }
 
 const ForumHead = () => {
-  const navigate = useNavigate<PostProps>()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
   const [filter, setFilter] = useState<Filter>({ topic: "", tags: [] })
   useEffect(() => {
     setFilter((prevState) => {
-      const locState = history.location.state
-      const locStateIsValid: boolean = !!locState && !!locState.topic && !!locState.tags
-      if (locStateIsValid) {
+      const params = { topic: searchParams.get("topic"), tags: searchParams.getAll("tags") }
+      const paramsAreValid: boolean = !!params.topic && !!params.tags.length
+      if (paramsAreValid) {
         return {
-          topic: locState.topic,
-          tags: locState.tags,
+          topic: params.topic || "",
+          tags: params.tags,
         }
       }
       return prevState
     })
-  }, [history.location.state])
+  }, [searchParams])
   return (
     <Wrapper>
       <Header color="var(--black-color)" className="mb-4">
@@ -51,7 +52,7 @@ const ForumHead = () => {
           </StyledWrapper>
         </Wrapper>
         <Wrapper className="d-flex flex-column justify-content-center px-2">
-          <img src={AddIcon} onClick={() => navigate.push("/forum/new")} alt="Add" />
+          <img src={AddIcon} onClick={() => navigate("/forum/new")} alt="Add" />
         </Wrapper>
       </Wrapper>
     </Wrapper>

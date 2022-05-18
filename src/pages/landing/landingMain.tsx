@@ -11,7 +11,7 @@ import { RootState } from "../../store/store"
 const Main = () => {
   const auth = useSelector((state: RootState) => state.auth)
   const [inProp, setInProp] = useState(false)
-  const history = useNavigate()
+  const navigate = useNavigate()
   useEffect(() => {
     setInProp(true)
   }, [])
@@ -32,11 +32,11 @@ const Main = () => {
             Explore more
           </StyledButton>
           {auth.isLogged ? (
-            <StyledButton bg="var(--white-color)" size="lg" onClick={() => navigate.push("/dashboard")}>
+            <StyledButton bg="var(--white-color)" size="lg" onClick={() => navigate("/dashboard")}>
               Dashboard
             </StyledButton>
           ) : (
-            <StyledButton bg="var(--white-color)" size="lg" onClick={() => navigate.push("/register")}>
+            <StyledButton bg="var(--white-color)" size="lg" onClick={() => navigate("/register")}>
               Join Us
             </StyledButton>
           )}
