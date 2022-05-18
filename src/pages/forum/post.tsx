@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Wrapper } from "../../components/containers"
 import { Header } from "../../components/utilities"
-import { useParams, useHistory } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { Button } from "react-bootstrap"
 import Axios from "axios"
 import useLoading from "../../contexts/loadingContext"
@@ -23,7 +23,7 @@ interface PostDataResponse extends PostDataProps {
 const Post = () => {
   const { setLoading } = useLoading()
   const [isAuthor, setAuthor] = useState(false)
-  const history = useHistory()
+  const navigate = useNavigate()
   const [postData, setPostData] = useState<PostDataProps>()
   const { user } = useSelector((state: RootState) => state.auth)
 
@@ -34,11 +34,11 @@ const Post = () => {
       withCredentials: true,
     })
       .then((res) => {
-        history.push("/")
+        navigate.push("/")
       })
       .catch((err) => {
         alert("You cannot delete post if you are not the author")
-        history.push("/")
+        navigate.push("/")
       })
     setLoading(false)
   }

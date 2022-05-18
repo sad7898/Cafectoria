@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react"
 import { Card, Form as StyleForm, Badge } from "react-bootstrap"
 import { Field, FieldAttributes, useField } from "formik"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 interface ResponsiveProps {
   sizeMobile?: string
@@ -14,6 +14,9 @@ interface CardProps {
   minW?: string
   titleColor: string
   titleSize: string
+  img: string
+  title: string
+  children?: React.ReactNode
 }
 interface CustomTagProps {
   tag: string
@@ -61,7 +64,7 @@ export const StyledText = styled.span<{ color?: string; size?: string }>`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
 `
-export const CustomCard: FunctionComponent<CardProps & { img: string; title: string }> = (props) => {
+export const CustomCard: FunctionComponent<CardProps> = (props) => {
   return (
     <StyledCard maxH={props.maxH} minH={props.minH} color={props.titleColor} titleSize={props.titleSize}>
       <StyledCard.Img className="img-fluid" src={props.img} alt={"Some image"} />
@@ -169,11 +172,13 @@ export const StyledList = styled.ul`
   padding-left: 0;
 `
 export const CustomTag = (props: CustomTagProps) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   function filterByTag() {
-    history.push("/forum/main", {
-      topic: "",
-      tags: [props.tag],
+    navigate("/forum/main", {
+      state: {
+        topic: "",
+        tags: [props.tag],
+      },
     })
   }
   return <StyledTag onClick={filterByTag}>{props.tag}</StyledTag>

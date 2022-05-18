@@ -3,7 +3,7 @@ import Main from "./landing/landingMain"
 import Register from "./register/regMain"
 import Login from "./login/loginMain"
 import Forum from "./forum/forumMain"
-import { Route, Switch } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import { Wrapper } from "../components/containers"
 import { Sidebar } from "../components/nav/nav"
 import { CustomFooter } from "../components/footer"
@@ -28,20 +28,12 @@ const Bundle = () => {
     <>
       <Sidebar />
       <Wrapper className="mt-5">
-        <Switch>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/forum">
-            <Forum />
-          </Route>
-          <Route exact path="/">
-            <Main />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/forum" element={<Forum />}></Route>
+          <Route path="/" element={<Main />}></Route>
+        </Routes>
       </Wrapper>
       <CustomFooter>Blackmarble Corps. ltd</CustomFooter>
     </>

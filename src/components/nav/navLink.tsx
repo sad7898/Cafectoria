@@ -1,17 +1,18 @@
-import { Link } from "react-router-dom";
-import React from "react";
-import styled from "styled-components";
+import { Link } from "react-router-dom"
+import React from "react"
+import styled from "styled-components"
 interface NavLinkProps {
-  to: string;
-  onClick?: () => void;
+  to: string
+  onClick?: () => void
+  children?: React.ReactNode
 }
-const NavLink: React.FunctionComponent<NavLinkProps> = (props) => {
+const NavLink: React.FC<NavLinkProps> = ({ children, ...rest }) => {
   return (
-    <Link {...props} role="button">
-      {props.children}
+    <Link {...rest} role="button">
+      {children}
     </Link>
-  );
-};
+  )
+}
 const StyledNavLink = styled(NavLink)<{ size?: string }>`
     display: block;
     padding: 0.5rem 1rem;
@@ -19,5 +20,5 @@ const StyledNavLink = styled(NavLink)<{ size?: string }>`
     &:hover{
         text-decoration-line: none;
     }
-`;
-export default StyledNavLink;
+`
+export default StyledNavLink

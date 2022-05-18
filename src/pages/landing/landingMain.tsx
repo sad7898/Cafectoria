@@ -1,29 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { CSSTransition } from "react-transition-group";
-import { useHistory } from "react-router-dom";
-import wallpaper from "../../images/mainWall.jpg";
-import { BSWrapper, Wrapper } from "../../components/containers";
-import { StyledButton } from "../../components/button";
-import IntroText from "./landingIntro";
-import { Header, SubHeader } from "../../components/utilities";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import React, { useState, useEffect } from "react"
+import { CSSTransition } from "react-transition-group"
+import { useNavigate } from "react-router-dom"
+import wallpaper from "../../images/mainWall.jpg"
+import { BSWrapper, Wrapper } from "../../components/containers"
+import { StyledButton } from "../../components/button"
+import IntroText from "./landingIntro"
+import { Header, SubHeader } from "../../components/utilities"
+import { useSelector } from "react-redux"
+import { RootState } from "../../store/store"
 const Main = () => {
-  const auth = useSelector((state: RootState) => state.auth);
-  const [inProp, setInProp] = useState(false);
-  const history = useHistory();
+  const auth = useSelector((state: RootState) => state.auth)
+  const [inProp, setInProp] = useState(false)
+  const history = useNavigate()
   useEffect(() => {
-    setInProp(true);
-  }, []);
+    setInProp(true)
+  }, [])
   return (
     <>
-      <BSWrapper
-        className="d-flex flex-row justify-content-center"
-        minh="320"
-        mg="0 0 -10px 0"
-        bg={`url(${wallpaper})`}
-        fluid
-      >
+      <BSWrapper className="d-flex flex-row justify-content-center" minh="320" mg="0 0 -10px 0" bg={`url(${wallpaper})`} fluid>
         <CSSTransition in={inProp} timeout={500} classNames="fade-down">
           <Wrapper className="w-100 d-flex flex-column align-items-center justify-content-center">
             <Header color="var(--white-color)">CAFETORIA</Header>
@@ -38,19 +32,11 @@ const Main = () => {
             Explore more
           </StyledButton>
           {auth.isLogged ? (
-            <StyledButton
-              bg="var(--white-color)"
-              size="lg"
-              onClick={() => history.push("/dashboard")}
-            >
+            <StyledButton bg="var(--white-color)" size="lg" onClick={() => navigate.push("/dashboard")}>
               Dashboard
             </StyledButton>
           ) : (
-            <StyledButton
-              bg="var(--white-color)"
-              size="lg"
-              onClick={() => history.push("/register")}
-            >
+            <StyledButton bg="var(--white-color)" size="lg" onClick={() => navigate.push("/register")}>
               Join Us
             </StyledButton>
           )}
@@ -61,6 +47,6 @@ const Main = () => {
         <IntroText />
       </BSWrapper>
     </>
-  );
-};
-export default Main;
+  )
+}
+export default Main
