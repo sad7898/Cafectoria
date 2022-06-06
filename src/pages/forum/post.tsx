@@ -18,14 +18,16 @@ interface PostDataProps {
   text: string
 }
 interface PostDataResponse extends PostDataProps {
-  author: string
+  author: {
+    name: string
+  }
 }
 const Post = () => {
   const { setLoading } = useLoading()
   const [isAuthor, setAuthor] = useState(false)
   const navigate = useNavigate()
   const [postData, setPostData] = useState<PostDataProps>()
-  const { user } = useSelector((state: RootState) => state.auth)
+  const user = useSelector((state: RootState) => state.auth)
 
   const { id } = useParams<{ id: string }>()
   const handleDel = async () => {
@@ -51,7 +53,7 @@ const Post = () => {
           withCredentials: true,
         })
         .then((res) => {
-          if (res.data.author === user) {
+          if (res.data.author.name === user.name) {
             setAuthor(true)
           } else {
             setAuthor(false)

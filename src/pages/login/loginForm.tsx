@@ -4,7 +4,7 @@ import { Form, Formik } from "formik"
 import { InputField, StyledText, Header } from "../../components/utilities"
 import { Wrapper } from "../../components/containers"
 import { StyledButton } from "../../components/button"
-import { setCurrentUser } from "../../store/actions/userActions"
+import { AuthPayload, setCurrentUser } from "../../store/actions/userActions"
 import { useDispatch } from "react-redux"
 import { client } from "../../axiosClient"
 import useLoading from "../../contexts/loadingContext"
@@ -12,6 +12,10 @@ import { useNavigate } from "react-router-dom"
 type LoginFormError = {
   user: string
   password: string
+}
+export interface SignInResponse {
+  token: string
+  user: AuthPayload
 }
 const LoginForm = () => {
   const dispatch = useDispatch()
@@ -37,10 +41,11 @@ const LoginForm = () => {
         onSubmit={async (values, { setSubmitting }) => {
           setLoading(true)
           await client
-            .post("/user/login", { userId: values.user, password: values.password }, { withCredentials: true })
-            .then((res) => {
+            .post<SignInResponse>("/user/login", { userId: values.user, password: values.password }, { withCredentials: true })
+            .then(({ data }) => {
+              const { user } = data
               setLoading(false)
-              dispatch(setCurrentUser(values.user))
+              dispatch(setCurrentUser({ name: user.name, email: user.email, roles: user.roles }))
               navigate("/")
             })
             .catch((err) => {

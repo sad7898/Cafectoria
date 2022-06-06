@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom"
 export const Sidebar = () => {
   const { isLoading, setLoading } = useLoading()
   const navigate = useNavigate()
-  const token = useSelector((state: RootState) => state.auth)
+  const user = useSelector((state: RootState) => state.auth)
   const dispatch = useDispatch()
   const [inProp, setInProp] = useState(false)
   async function handleLogOut() {
@@ -57,11 +57,11 @@ export const Sidebar = () => {
             </div>
             <ul className="sidebar-menu d-flex flex-column justify-content-between mt-3">
               <div>
-                {token.isLogged ? (
+                {user.isLogged ? (
                   <>
                     <li>
                       <StyledNavLink to="/dashboard" size="16px">
-                        Welcome {token.user}
+                        Welcome {user.name}
                       </StyledNavLink>
                     </li>
                   </>
@@ -72,7 +72,7 @@ export const Sidebar = () => {
               </div>
               <div className="w-100">
                 <li>
-                  {token.isLogged ? (
+                  {user.isLogged ? (
                     <StyledNavLink to="/" onClick={handleLogOut}>
                       Sign Out
                     </StyledNavLink>

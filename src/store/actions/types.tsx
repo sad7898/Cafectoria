@@ -1,4 +1,4 @@
-export interface CustomAction {
-  type: string;
-  data?: any;
+export interface CustomAction<T> {
+  type: string
+  data: T
 }

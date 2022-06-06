@@ -1,6 +1,6 @@
 import React, { ComponentType } from "react"
-import { Route, RouteProps, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { RouteProps, useNavigate, Route } from "react-router-dom"
 import { RootState } from "../store/store"
 
 interface PrivateRouteProps extends RouteProps {
