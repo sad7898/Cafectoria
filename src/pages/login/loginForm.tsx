@@ -4,11 +4,11 @@ import { Form, Formik } from "formik"
 import { InputField, StyledText, Header } from "../../components/utilities"
 import { Wrapper } from "../../components/containers"
 import { StyledButton } from "../../components/button"
-import { useNavigate } from "react-router-dom"
 import { setCurrentUser } from "../../store/actions/userActions"
 import { useDispatch } from "react-redux"
-import Axios from "axios"
+import { client } from "../../axiosClient"
 import useLoading from "../../contexts/loadingContext"
+import { useNavigate } from "react-router-dom"
 type LoginFormError = {
   user: string
   password: string
@@ -36,11 +36,8 @@ const LoginForm = () => {
         }}
         onSubmit={async (values, { setSubmitting }) => {
           setLoading(true)
-          await Axios.post(
-            "https://cafetoria-backend.herokuapp.com/user/login",
-            { user: values.user, password: values.password },
-            { withCredentials: true }
-          )
+          await client
+            .post("/user/login", { userId: values.user, password: values.password }, { withCredentials: true })
             .then((res) => {
               setLoading(false)
               dispatch(setCurrentUser(values.user))

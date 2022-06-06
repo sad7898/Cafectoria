@@ -3,23 +3,25 @@ import Main from "./landing/landingMain"
 import Register from "./register/regMain"
 import Login from "./login/loginMain"
 import Forum from "./forum/forumMain"
-import { Route, Routes } from "react-router-dom"
 import { Wrapper } from "../components/containers"
-import { Sidebar } from "../components/nav/nav"
 import { CustomFooter } from "../components/footer"
 import { useDispatch } from "react-redux"
 import { setCurrentUser } from "../store/actions/userActions"
 
-import Axios from "axios"
+import { client } from "../axiosClient"
+import { Routes, Route } from "react-router-dom"
+import { Sidebar } from "../components/nav/nav"
 
 const Bundle = () => {
   const dispatch = useDispatch()
   const verify = useCallback(() => {
-    Axios.get("https://cafetoria-backend.herokuapp.com/user/verify", {
-      withCredentials: true,
-    }).then((res) => {
-      dispatch(setCurrentUser(res.data.user))
-    })
+    client
+      .get("/user/verify", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        dispatch(setCurrentUser(res.data.user))
+      })
   }, [dispatch])
   useEffect(() => {
     verify()

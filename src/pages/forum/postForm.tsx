@@ -3,8 +3,8 @@ import { Form } from "react-bootstrap"
 import { BrightInput, StyledText, StyledTag } from "../../components/utilities"
 import { Wrapper } from "../../components/containers"
 import { StyledButton } from "../../components/button"
+import { client } from "../../axiosClient"
 import { useNavigate } from "react-router-dom"
-import Axios from "axios"
 const PostForm = () => {
   const navigate = useNavigate()
   const [text, setText] = useState("")
@@ -30,7 +30,8 @@ const PostForm = () => {
     setTags(tempArr)
   }
   async function handleSubmit() {
-    await Axios.post("https://cafetoria-backend.herokuapp.com/post", { postTopic: topic, postText: text, tags: tags }, { withCredentials: true })
+    await client
+      .post("/post", { topic: topic, Text: text, tags: tags }, { withCredentials: true })
       .then((res) => {
         navigate("/forum")
       })

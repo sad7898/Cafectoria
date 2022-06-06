@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Spinner } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
 import StyledNavLink from "./navLink"
 import { data } from "./navData"
 import Exit from "../../images/exit.svg"
@@ -8,9 +7,10 @@ import Toggler from "../../images/hamburger.svg"
 import { CSSTransition } from "react-transition-group"
 import { useSelector, useDispatch } from "react-redux"
 import { LogOut } from "../../store/actions/userActions"
-import Axios from "axios"
+import { client } from "../../axiosClient"
 import useLoading from "../../contexts/loadingContext"
 import { RootState } from "../../store/store"
+import { useNavigate } from "react-router-dom"
 
 export const Sidebar = () => {
   const { isLoading, setLoading } = useLoading()
@@ -21,7 +21,8 @@ export const Sidebar = () => {
   async function handleLogOut() {
     setLoading(true)
     setInProp(false)
-    await Axios.post("https://cafetoria-backend.herokuapp.com/user/signout", {}, { headers: { crossDomain: true }, withCredentials: true })
+    await client
+      .post("/user/signout", {}, { headers: { crossDomain: true }, withCredentials: true })
       .then((res) => {
         navigate("/")
         dispatch(LogOut())

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Wrapper } from "../../components/containers"
 import { Header } from "../../components/utilities"
-import { useParams, useNavigate } from "react-router-dom"
 import { Button } from "react-bootstrap"
-import Axios from "axios"
 import useLoading from "../../contexts/loadingContext"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
+import { client } from "../../axiosClient"
+import { useNavigate, useParams } from "react-router-dom"
 export interface PostProps {
   id?: string
   topic: string
@@ -30,9 +30,10 @@ const Post = () => {
   const { id } = useParams<{ id: string }>()
   const handleDel = async () => {
     setLoading(true)
-    await Axios.delete(`https://cafetoria-backend.herokuapp.com/post/${id}`, {
-      withCredentials: true,
-    })
+    await client
+      .delete(`/post/${id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         navigate("/")
       })
@@ -45,19 +46,21 @@ const Post = () => {
   useEffect(() => {
     async function loadContent() {
       setLoading(true)
-      await Axios.get<PostDataResponse[]>(`https://cafetoria-backend.herokuapp.com/post/${id}`, {
-        withCredentials: true,
-      }).then((res) => {
-        if (res.data[0].author === user) {
-          setAuthor(true)
-        } else {
-          setAuthor(false)
-        }
-        setPostData({
-          topic: res.data[0].topic,
-          text: res.data[0].text,
+      await client
+        .get<PostDataResponse>(`/post/${id}`, {
+          withCredentials: true,
         })
-      })
+        .then((res) => {
+          if (res.data.author === user) {
+            setAuthor(true)
+          } else {
+            setAuthor(false)
+          }
+          setPostData({
+            topic: res.data.topic,
+            text: res.data.text,
+          })
+        })
       setLoading(false)
     }
     loadContent()

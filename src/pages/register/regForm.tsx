@@ -5,9 +5,9 @@ import { StyledButton } from "../../components/button"
 import { Formik, Form } from "formik"
 import { Form as StyleForm } from "react-bootstrap"
 
-import Axios from "axios"
-import { useNavigate } from "react-router-dom"
+import { client } from "../../axiosClient"
 import useLoading from "../../contexts/loadingContext"
+import { useNavigate } from "react-router-dom"
 interface RegProps {
   secret: string
   children?: ReactNode
@@ -57,12 +57,12 @@ const Reg = ({ secret }: RegProps) => {
         initialValues={{ email: "", user: "", password: "" }}
         onSubmit={async (values, { setSubmitting }) => {
           setLoading(true)
-          await Axios.post("https://cafetoria-backend.herokuapp.com/user/signup", {
-            user: values.user,
-            password: values.password,
-            email: values.email,
-            secret: secret,
-          })
+          await client
+            .post("/user/signup", {
+              username: values.user,
+              password: values.password,
+              email: values.email,
+            })
             .then((res) => {
               navigate("/login")
             })

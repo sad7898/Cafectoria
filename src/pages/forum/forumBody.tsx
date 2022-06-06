@@ -1,13 +1,15 @@
 import Axios from "axios"
 import React, { useState, useEffect, useCallback } from "react"
 import { Wrapper } from "../../components/containers"
-import { useNavigate, Routes, Route, useLocation, useSearchParams } from "react-router-dom"
 import PostLink from "./postLink"
+import { client } from "../../axiosClient"
 import { Table, Pagination } from "react-bootstrap"
 import Post, { PostProps } from "./post"
 import { StyledRow } from "../../components/utilities"
 import Refresh from "../../images/refresh.png"
 import useLoading from "../../contexts/loadingContext"
+import path from "path"
+import { useNavigate, useSearchParams, useLocation, Route, Routes } from "react-router-dom"
 
 const ForumBody = () => {
   const { setLoading } = useLoading()
@@ -20,29 +22,31 @@ const ForumBody = () => {
   const [postList, setPostList] = useState<PostProps[]>([])
   const loadContent = useCallback(async () => {
     setLoading(true)
-    await Axios.get("https://cafetoria-backend.herokuapp.com/api/post", {
-      withCredentials: true,
-      params: {
-        p: page - 1,
-        topic: searchParams.get("topic"),
-        tags: searchParams.getAll("tags").length !== 0 ? searchParams.getAll("tags") : undefined,
-      },
-    }).then((res) => {
-      setMaxPage(Math.ceil(res.data.count / 10))
-      setPostList(res.data.post)
-      let nearestFiveFloor
-      if (page % 5 === 0 && page !== 1) nearestFiveFloor = page - 4
-      else nearestFiveFloor = 5 * Math.floor(page / 5) + 1
-      let nearestFiveCeil = 5 * Math.ceil(page / 5)
-      if (nearestFiveCeil > Math.ceil(res.data.count / 10)) nearestFiveCeil = Math.ceil(res.data.count / 10)
-      const arr = []
-      for (let i = nearestFiveFloor; i <= nearestFiveCeil; i++) {
-        arr.push(i)
-      }
-      setPageNav(arr)
-    })
+    await client
+      .post(
+        `/post/feed/${page - 1}`,
+        {
+          topic: searchParams.get("topic"),
+          tags: searchParams.getAll("tags").length !== 0 ? searchParams.getAll("tags") : undefined,
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        setMaxPage(Math.ceil(res.data.count / 10))
+        setPostList(res.data)
+        let nearestFiveFloor
+        if (page % 5 === 0 && page !== 1) nearestFiveFloor = page - 4
+        else nearestFiveFloor = 5 * Math.floor(page / 5) + 1
+        let nearestFiveCeil = 5 * Math.ceil(page / 5)
+        if (nearestFiveCeil > Math.ceil(res.data.count / 10)) nearestFiveCeil = Math.ceil(res.data.count / 10)
+        const arr = []
+        for (let i = nearestFiveFloor; i <= nearestFiveCeil; i++) {
+          arr.push(i)
+        }
+        setPageNav(arr)
+      })
     setLoading(false)
-  }, [searchParams, page, setLoading])
+  }, [page, setLoading])
   function jumpUp() {
     const currentPage = page
     setPage(5 * Math.ceil(currentPage / 5) + 1)
@@ -64,7 +68,7 @@ const ForumBody = () => {
   return (
     <Wrapper bg="#dedede" rborder="10px" pd="1rem 1rem 1rem 1rem" mg="1rem auto auto auto">
       <Routes>
-        <Route path={`${pathname}/:id`}>
+        <Route path={`${path}/:id`}>
           <Post />
         </Route>
         <Route path={pathname}>
@@ -82,7 +86,7 @@ const ForumBody = () => {
             </thead>
             <tbody>
               {postList.map((val) => {
-                return <PostLink key={val.id} to={`${pathname}/${val.id}`} author={val.author} topic={val.topic} tags={val.tags}></PostLink>
+                return <PostLink key={val.id} to={`${path}/${val.id}`} author={val.author} topic={val.topic} tags={val.tags}></PostLink>
               })}
             </tbody>
           </Table>
