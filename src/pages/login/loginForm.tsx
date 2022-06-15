@@ -41,9 +41,10 @@ const LoginForm = () => {
         onSubmit={async (values, { setSubmitting }) => {
           setLoading(true)
           await client
-            .post<SignInResponse>("/user/login", { userId: values.user, password: values.password }, { withCredentials: true })
+            .post<SignInResponse>("/user/login", { userId: values.user, password: values.password })
             .then(({ data }) => {
               const { user } = data
+              localStorage.setItem("token", data.token)
               setLoading(false)
               dispatch(setCurrentUser({ name: user.name, email: user.email, roles: user.roles }))
               navigate("/")

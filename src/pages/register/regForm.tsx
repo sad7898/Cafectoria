@@ -63,7 +63,7 @@ const Reg = ({ secret }: RegProps) => {
               password: values.password,
               email: values.email,
             })
-            .then((res) => {
+            .then((_) => {
               navigate("/login")
             })
             .catch((err) => {

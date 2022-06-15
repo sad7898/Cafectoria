@@ -6,7 +6,7 @@ import Forum from "./forum/forumMain"
 import { Wrapper } from "../components/containers"
 import { CustomFooter } from "../components/footer"
 import { useDispatch } from "react-redux"
-import { setCurrentUser } from "../store/actions/userActions"
+import { AuthPayload, setCurrentUser } from "../store/actions/userActions"
 
 import { client } from "../axiosClient"
 import { Routes, Route } from "react-router-dom"
@@ -16,12 +16,12 @@ const Bundle = () => {
   const dispatch = useDispatch()
   const verify = useCallback(() => {
     client
-      .get("/user/verify", {
-        withCredentials: true,
-      })
+      .get<AuthPayload>("/user")
       .then((res) => {
-        dispatch(setCurrentUser(res.data.user))
+        console.log("hello")
+        dispatch(setCurrentUser(res.data))
       })
+      .catch((err) => console.log(err))
   }, [dispatch])
   useEffect(() => {
     verify()

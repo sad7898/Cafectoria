@@ -8,7 +8,6 @@ import Post, { PostProps } from "./post"
 import { StyledRow } from "../../components/utilities"
 import Refresh from "../../images/refresh.png"
 import useLoading from "../../contexts/loadingContext"
-import path from "path"
 import { useNavigate, useSearchParams, useLocation, Route, Routes } from "react-router-dom"
 
 const ForumBody = () => {
@@ -68,7 +67,7 @@ const ForumBody = () => {
   return (
     <Wrapper bg="#dedede" rborder="10px" pd="1rem 1rem 1rem 1rem" mg="1rem auto auto auto">
       <Routes>
-        <Route path={`${path}/:id`}>
+        <Route path={`${pathname}/:id`}>
           <Post />
         </Route>
         <Route path={pathname}>
@@ -86,7 +85,7 @@ const ForumBody = () => {
             </thead>
             <tbody>
               {postList.map((val) => {
-                return <PostLink key={val.id} to={`${path}/${val.id}`} author={val.author} topic={val.topic} tags={val.tags}></PostLink>
+                return <PostLink key={val.id} to={`${pathname}/${val.id}`} author={val.author} topic={val.topic} tags={val.tags}></PostLink>
               })}
             </tbody>
           </Table>
