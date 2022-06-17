@@ -13,7 +13,6 @@ import { ChartData } from "react-chartjs-2"
 import { Modal } from "../modal/modal"
 
 const IntroText = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [pieData, setPieData] = useState<ChartData<any>>()
   const fetchPie = useCallback(async () => {
     await client.get("/pie").then((res) => {
@@ -34,8 +33,6 @@ const IntroText = () => {
   }, [fetchPie])
   return (
     <>
-      <Button onClick={() => setIsModalOpen((prev) => !prev)}>open modal</Button>
-
       <Wrapper mg="10px auto 10px auto">
         <Wrapper mg="0 0 20px 0">
           <SubHeader className="text-center" sizeMobile="1.75rem" sizeDesktop="2rem" color="var(--grey-color)">
@@ -75,7 +72,6 @@ const IntroText = () => {
           </Col>
         </Row>
         <Row></Row>
-        <Modal isOpen={isModalOpen} message="booo" onClose={() => setIsModalOpen(false)} title="error" />
       </Wrapper>
     </>
   )
