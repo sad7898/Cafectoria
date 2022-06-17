@@ -11,6 +11,11 @@ import { AuthPayload, setCurrentUser } from "../store/actions/userActions"
 import { client } from "../axiosClient"
 import { Routes, Route } from "react-router-dom"
 import { Sidebar } from "../components/nav/nav"
+import Filter from "./forum/filter"
+import ForumBody from "./forum/forumBody"
+import PostForm from "./forum/postForm"
+import Post from "./forum/post"
+import { ForumBrowser } from "./forum/forumBrowser"
 
 const Bundle = () => {
   const dispatch = useDispatch()
@@ -33,7 +38,14 @@ const Bundle = () => {
         <Routes>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/forum" element={<Forum />}></Route>
+          <Route path="/forum" element={<Forum />}>
+            <Route path={`new`} element={<PostForm />}></Route>
+            <Route path={`main`} element={<ForumBody />}>
+              <Route path={""} element={<ForumBrowser />}></Route>
+              <Route path={`:id`} element={<Post />}></Route>
+            </Route>
+            <Route path={`filter`} element={<Filter />}></Route>
+          </Route>
           <Route path="/" element={<Main />}></Route>
         </Routes>
       </Wrapper>

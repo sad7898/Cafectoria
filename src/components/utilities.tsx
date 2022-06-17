@@ -119,8 +119,8 @@ export const InputField = (props: any) => {
     </>
   )
 }
-const BootstrapForm = (props: any & { isTextArea: boolean }) => {
-  return <StyleForm.Control {...props} as={props.isTextArea ? "textarea" : "input"}></StyleForm.Control>
+const BootstrapForm = (props: any & { beTextArea: boolean }) => {
+  return <StyleForm.Control {...props} as={props.beTextArea ? "textarea" : "input"}></StyleForm.Control>
 }
 export const BrightInput = styled(BootstrapForm)`
 font-size: 1rem;

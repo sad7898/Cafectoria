@@ -1,7 +1,7 @@
 import React from "react"
 import { Container } from "react-bootstrap"
 import { EyeLevel, DecoratedBlock } from "../../components/containers"
-import { Routes, Route, useLocation } from "react-router-dom"
+import { Routes, Route, useLocation, Outlet } from "react-router-dom"
 import ForumHead from "./forumHead"
 import ForumBody from "./forumBody"
 import Filter from "./filter"
@@ -21,15 +21,7 @@ const Forum = () => {
       <EyeLevel>
         <DynamicBlock bg="white" shadow>
           <ForumHead />
-          <Routes>
-            <Route path={`${pathname}/new`}>
-              <PostForm />
-            </Route>
-            <Route path={`${pathname}/main`} element={<ForumBody />} />
-            <Route path={`${pathname}/filter`}>
-              <Filter></Filter>
-            </Route>
-          </Routes>
+          <Outlet />
         </DynamicBlock>
       </EyeLevel>
     </Container>

@@ -52,7 +52,7 @@ const PostForm = () => {
           <Form.Label>
             <StyledText>Content</StyledText>
           </Form.Label>
-          <BrightInput type="text" isTextArea={true} rows={3} placeholder="Enter Text" name="text" value={text} onChange={onChangeText} required />
+          <BrightInput type="text" beTextArea={true} rows={3} placeholder="Enter Text" name="text" value={text} onChange={onChangeText} required />
         </Form.Group>
         <Form.Group controlId="tags" className="d-flex flex-column">
           <Form.Label>Select atleast one tag</Form.Label>

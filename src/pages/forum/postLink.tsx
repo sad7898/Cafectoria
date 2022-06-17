@@ -1,9 +1,9 @@
-import React from "react";
-import { StyledRow, StyledTag } from "../../components/utilities";
-import { Link } from "react-router-dom";
-import { PostProps } from "./post";
-interface PostLinkProps extends Omit<PostProps, "id"> {
-  to: string;
+import React from "react"
+import { StyledRow, StyledTag } from "../../components/utilities"
+import { Link } from "react-router-dom"
+import { PostProps } from "./post"
+interface PostLinkProps extends Omit<PostProps, "_id"> {
+  to: string
 }
 const PostLink = (props: PostLinkProps) => {
   return (
@@ -13,12 +13,12 @@ const PostLink = (props: PostLinkProps) => {
       </td>
       <td>
         {props.tags.map((val) => {
-          return <StyledTag>{val}</StyledTag>;
+          return <StyledTag>{val}</StyledTag>
         })}
       </td>
       <td></td>
-      <td>{props.author}</td>
+      <td>{props.author.name}</td>
     </StyledRow>
-  );
-};
-export default PostLink;
+  )
+}
+export default PostLink

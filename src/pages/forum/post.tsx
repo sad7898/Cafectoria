@@ -8,10 +8,13 @@ import { RootState } from "../../store/store"
 import { client } from "../../axiosClient"
 import { useNavigate, useParams } from "react-router-dom"
 export interface PostProps {
-  id?: string
+  _id: string
   topic: string
   tags: string[]
-  author?: string
+  author: {
+    _id: string
+    name: string
+  }
 }
 interface PostDataProps {
   topic: string
@@ -33,9 +36,7 @@ const Post = () => {
   const handleDel = async () => {
     setLoading(true)
     await client
-      .delete(`/post/${id}`, {
-        withCredentials: true,
-      })
+      .delete(`/post/${id}`)
       .then((res) => {
         navigate("/")
       })
@@ -48,21 +49,18 @@ const Post = () => {
   useEffect(() => {
     async function loadContent() {
       setLoading(true)
-      await client
-        .get<PostDataResponse>(`/post/${id}`, {
-          withCredentials: true,
+      await client.get<PostDataResponse>(`/post/${id}`).then((res) => {
+        console.log(res.data)
+        if (res.data.author.name === user.name) {
+          setAuthor(true)
+        } else {
+          setAuthor(false)
+        }
+        setPostData({
+          topic: res.data.topic,
+          text: res.data.text,
         })
-        .then((res) => {
-          if (res.data.author.name === user.name) {
-            setAuthor(true)
-          } else {
-            setAuthor(false)
-          }
-          setPostData({
-            topic: res.data.topic,
-            text: res.data.text,
-          })
-        })
+      })
       setLoading(false)
     }
     loadContent()
