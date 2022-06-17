@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react"
-import { Row, Col } from "react-bootstrap"
+import { Row, Col, Button } from "react-bootstrap"
 import { Wrapper } from "../../components/containers"
 import { Header, SubHeader } from "../../components/utilities"
 import { IntroContent } from "./introContent"
@@ -10,8 +10,10 @@ import Click from "../../images/click-here.svg"
 import Pie from "../../components/charts/pie"
 import { client } from "../../axiosClient"
 import { ChartData } from "react-chartjs-2"
+import { Modal } from "../modal/modal"
 
 const IntroText = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [pieData, setPieData] = useState<ChartData<any>>()
   const fetchPie = useCallback(async () => {
     await client.get("/pie").then((res) => {
@@ -31,48 +33,51 @@ const IntroText = () => {
     fetchPie()
   }, [fetchPie])
   return (
-    <Wrapper mg="10px auto 10px auto">
-      <Wrapper mg="0 0 20px 0">
-        <SubHeader className="text-center" sizeMobile="1.75rem" sizeDesktop="2rem" color="var(--grey-color)">
-          Explore and share recipes
-        </SubHeader>
-        <SubHeader className="text-center" sizeMobile="1.4rem" sizeDesktop="1.5rem" color="var(--grey-color)">
-          What kind of food are people making?
-        </SubHeader>
+    <>
+      <Button onClick={() => setIsModalOpen((prev) => !prev)}>open modal</Button>
+
+      <Wrapper mg="10px auto 10px auto">
+        <Wrapper mg="0 0 20px 0">
+          <SubHeader className="text-center" sizeMobile="1.75rem" sizeDesktop="2rem" color="var(--grey-color)">
+            Explore and share recipes
+          </SubHeader>
+          <SubHeader className="text-center" sizeMobile="1.4rem" sizeDesktop="1.5rem" color="var(--grey-color)">
+            What kind of food are people making?
+          </SubHeader>
+        </Wrapper>
+        <Row>
+          <Col></Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={4} className="mb-4">
+            <IntroContent imgSrc={Icon}>
+              <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">
+                Good food, good life
+              </Header>
+              <SubHeader sizeDesktop="1rem">Delicious food makes you brighter.</SubHeader>
+            </IntroContent>
+          </Col>
+          <Col xs={12} md={4} className="mb-4">
+            <IntroContent imgSrc={Watch}>
+              <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">
+                Lightning Speed
+              </Header>
+              <SubHeader sizeDesktop="1rem">Say goodbye to standing in queue.</SubHeader>
+            </IntroContent>
+          </Col>
+          <Col xs={12} md={4} className="mb-4">
+            <IntroContent imgSrc={Click}>
+              <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">
+                Simple
+              </Header>
+              <SubHeader sizeDesktop="1rem">It's made for everyone!</SubHeader>
+            </IntroContent>
+          </Col>
+        </Row>
+        <Row></Row>
+        <Modal isOpen={isModalOpen} message="booo" onClose={() => setIsModalOpen(false)} title="error" />
       </Wrapper>
-      <Row>
-        <Col>
-          <Pie data={pieData} />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12} md={4} className="mb-4">
-          <IntroContent imgSrc={Icon}>
-            <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">
-              Good food, good life
-            </Header>
-            <SubHeader sizeDesktop="1rem">Delicious food makes you brighter.</SubHeader>
-          </IntroContent>
-        </Col>
-        <Col xs={12} md={4} className="mb-4">
-          <IntroContent imgSrc={Watch}>
-            <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">
-              Lightning Speed
-            </Header>
-            <SubHeader sizeDesktop="1rem">Say goodbye to standing in queue.</SubHeader>
-          </IntroContent>
-        </Col>
-        <Col xs={12} md={4} className="mb-4">
-          <IntroContent imgSrc={Click}>
-            <Header sizeMobile="1.25rem" sizeDesktop="1.3rem">
-              Simple
-            </Header>
-            <SubHeader sizeDesktop="1rem">It's made for everyone!</SubHeader>
-          </IntroContent>
-        </Col>
-      </Row>
-      <Row></Row>
-    </Wrapper>
+    </>
   )
 }
 export default IntroText

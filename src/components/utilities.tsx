@@ -119,6 +119,15 @@ export const InputField = (props: any) => {
     </>
   )
 }
+export const Backdrop = styled.div<{ in: boolean }>`
+  display: ${(props) => (props.in ? "flex" : "none")};
+  z-index: 1900;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  background: rgb(122, 128, 144, 0.7);
+`
 const BootstrapForm = (props: any & { beTextArea: boolean }) => {
   return <StyleForm.Control {...props} as={props.beTextArea ? "textarea" : "input"}></StyleForm.Control>
 }

@@ -11,6 +11,7 @@ import { client } from "../../axiosClient"
 import useLoading from "../../contexts/loadingContext"
 import { RootState } from "../../store/store"
 import { useNavigate } from "react-router-dom"
+import { Backdrop } from "../utilities"
 
 export const Sidebar = () => {
   const { isLoading, setLoading } = useLoading()
@@ -92,7 +93,7 @@ export const Sidebar = () => {
           </nav>
         </div>
       </CSSTransition>
-      <span className="backdrop" style={{ display: inProp ? "flex" : "none" }} />
+      <Backdrop in={inProp} />
     </>
   )
 }

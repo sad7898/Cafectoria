@@ -43,13 +43,28 @@ body{
     overflow: auto;
     position: relative;
 }
+.fs-1 {
+    font-size: small;
+}
+.fs-2 {
+    font-size: medium;
+}
+.fs-3 {
+    font-size: large;
+}
+.fs-4 {
+    font-size: x-large;
+}
+.fs-5 {
+    font-size: xx-large;
+}
 
-a,p{
+a{
     color: var(--grey-color) !important;
     transition: 0.3s;
     font-size: 1.25rem;
 }
-a:hover,p:hover{
+a:hover{
     font-size: 1.3rem;
     text-decoration-line: none;
 }
