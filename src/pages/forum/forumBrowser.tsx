@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { startTransition, useCallback, useEffect, useRef, useState } from "react"
 import { Table, Pagination } from "react-bootstrap"
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom"
 import { client } from "../../axiosClient"
@@ -18,15 +18,20 @@ export const ForumBrowser = () => {
   const [maxPage, setMaxPage] = useState(1)
   const [pageNav, setPageNav] = useState([1])
   const [postList, setPostList] = useState<PostProps[]>([])
+  const setPageTransition = (page: number) => {
+    startTransition(() => {
+      setPage(page)
+    })
+  }
   const loadContent = useCallback(async () => {
     setLoading(true)
     const filter = {
       topic: searchParams.get("topic"),
       tags: searchParams.getAll("tags").length !== 0 ? searchParams.getAll("tags") : undefined,
+      sortKey: searchParams.get("topic") ? "topic" : "created",
     }
     await client.post(`/post/${page - 1}`, filter).then((res) => {
       setMaxPage(Math.ceil(res.data.count / 10))
-      console.log(res.data)
       setPostList(res.data)
       let nearestFiveFloor
       if (page % 5 === 0 && page !== 1) nearestFiveFloor = page - 4
@@ -43,27 +48,25 @@ export const ForumBrowser = () => {
   }, [page, setLoading, searchParams])
   function jumpUp() {
     const currentPage = page
-    setPage(5 * Math.ceil(currentPage / 5) + 1)
+    setPageTransition(5 * Math.ceil(currentPage / 5) + 1)
   }
 
   function jumpDown() {
     const currentPage = page
     if (currentPage % 5 === 0) {
-      setPage(5 * (Math.floor(currentPage / 5) - 1))
+      setPageTransition(5 * (Math.floor(currentPage / 5) - 1))
     } else {
-      setPage(5 * Math.floor(currentPage / 5))
+      setPageTransition(5 * Math.floor(currentPage / 5))
     }
   }
-
+  useEffect(() => {
+    setPageTransition(1)
+  }, [searchParams])
   useEffect(() => {
     loadContent()
   }, [loadContent])
-
   return (
     <>
-      <Wrapper className="d-flex flex-row justify-content-end align-content-center">
-        <img src={Refresh} onClick={loadContent} alt="refresh" />
-      </Wrapper>
       <Table striped borderless hover>
         <thead>
           <StyledRow>
@@ -81,7 +84,7 @@ export const ForumBrowser = () => {
       </Table>
       <Wrapper className="d-flex flex-row justify-content-center">
         <Pagination>
-          <Pagination.First onClick={() => setPage(1)}></Pagination.First>
+          <Pagination.First onClick={() => setPageTransition(1)}></Pagination.First>
           {page <= 5 ? "" : <Pagination.Ellipsis onClick={jumpDown} />}
           {pageNav.map((val, indx) => {
             return (
@@ -89,7 +92,7 @@ export const ForumBrowser = () => {
                 active={page === val}
                 key={`item-${indx}`}
                 onClick={() => {
-                  setPage(val)
+                  setPageTransition(val)
                 }}
               >
                 {val}
@@ -97,7 +100,6 @@ export const ForumBrowser = () => {
             )
           })}
           {page > 5 * Math.floor(maxPage) || page === maxPage || maxPage <= 5 ? "" : <Pagination.Ellipsis onClick={jumpUp} />}
-          <Pagination.Last onClick={() => setPage(maxPage)} />
         </Pagination>
       </Wrapper>
     </>

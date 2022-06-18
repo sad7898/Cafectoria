@@ -1,112 +1,108 @@
-@import './components/nav/navbar.css';
+@import "./components/nav/navbar.css";
 @font-face {
-    font-family: 'Quicksand';
-    src: local('Quicksand'), url(./images/Quicksand/static/Quicksand-Medium.ttf) format('truetype');
-  }
+  font-family: "Quicksand";
+  src: local("Quicksand"), url(./images/Quicksand/static/Quicksand-Medium.ttf) format("truetype");
+}
 
-
-  *{
-    font-family: 'Quicksand', sans-serif;
-
-  }
+* {
+  font-family: "Quicksand", sans-serif;
+}
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px var(--grey-color) inset !important;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--grey-color) inset !important;
 }
 input:-webkit-autofill {
-    -webkit-text-fill-color: var(--white-color) !important;
+  -webkit-text-fill-color: var(--white-color) !important;
 }
-:root{
-    --white-color : #eeeeee;
-    --green-color :#32e0c4;
-    --grey-color: #393e46;
-    --black-color: #222831;
+:root {
+  --white-color: #eeeeee;
+  --green-color: #32e0c4;
+  --grey-color: #393e46;
+  --black-color: #222831;
 }
-body,html {
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
+body,
+html {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
 }
-body{
-    margin: 0;
-    position: relative;
+body {
+  margin: 0;
+  position: relative;
 }
 #root {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    background: var(--white-color);
-    overflow: auto;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  background: var(--white-color);
+  overflow: auto;
+  position: relative;
 }
 .fs-1 {
-    font-size: small;
+  font-size: small;
 }
 .fs-2 {
-    font-size: medium;
+  font-size: medium;
 }
 .fs-3 {
-    font-size: large;
+  font-size: large;
 }
 .fs-4 {
-    font-size: x-large;
+  font-size: x-large;
 }
 .fs-5 {
-    font-size: xx-large;
+  font-size: xx-large;
 }
 
-a{
-    color: var(--grey-color) !important;
-    transition: 0.3s;
-    font-size: 1.25rem;
+a {
+  color: var(--grey-color) !important;
 }
-a:hover{
-    font-size: 1.3rem;
-    text-decoration-line: none;
+a:hover {
+  text-decoration-line: none;
 }
-.fade-down-enter{
-    opacity: 0;
+.fade-down-enter {
+  opacity: 0;
 }
-.fade-down-enter-active{
-    opacity: 0.5;
-    transition: opacity 1s
+.fade-down-enter-active {
+  opacity: 0.5;
+  transition: opacity 1s;
 }
-.fade-down-enter-done{
-    opacity: 1;
-    transition: opacity 1s
+.fade-down-enter-done {
+  opacity: 1;
+  transition: opacity 1s;
 }
-.fade-down-enter h3{
-    opacity: 0;
+.fade-down-enter h3 {
+  opacity: 0;
 }
-.fade-down-enter-active h3{
-    opacity: 0;
-    transition: opacity 1s,transform 2s
+.fade-down-enter-active h3 {
+  opacity: 0;
+  transition: opacity 1s, transform 2s;
 }
-.fade-down-enter-done h3{
-    opacity: 1;
-    transform: translateY(10px);
-    transition: opacity 1s,transform 2s
+.fade-down-enter-done h3 {
+  opacity: 1;
+  transform: translateY(10px);
+  transition: opacity 1s, transform 2s;
 }
-.fade-down-enter hr{
-    margin: 0;
-    width: 0;
-    border: 0;
-    transition: width 3s;
+.fade-down-enter hr {
+  margin: 0;
+  width: 0;
+  border: 0;
+  transition: width 3s;
 }
-.fade-down-enter-active hr{
-    margin: 0;
-    width: 50%;
-    border: 4px solid var(--green-color);
-    transition: width 2s;
+.fade-down-enter-active hr {
+  margin: 0;
+  width: 50%;
+  border: 4px solid var(--green-color);
+  transition: width 2s;
 }
-.fade-down-enter-done hr{
-    margin: 0;
-    width: 50%;
-    border: 4px solid var(--green-color);
-    border-radius: 5px;
-    transition: width 2s;
+.fade-down-enter-done hr {
+  margin: 0;
+  width: 50%;
+  border: 4px solid var(--green-color);
+  border-radius: 5px;
+  transition: width 2s;
 }

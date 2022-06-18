@@ -11,7 +11,7 @@ const Filter = () => {
   const [tags, setTags] = useState<string[]>([])
 
   async function handleSubmit() {
-    const params = createSearchParams({ tags: tags, topic: topic })
+    const params = createSearchParams({ tags: tags, topic: topic ?? null })
     navigate({ pathname: "/forum/main", search: `?${params}` })
   }
 
@@ -45,10 +45,10 @@ const Filter = () => {
             <option value="empty" style={{ display: tags.length === 0 ? "" : "none" }}>
               {" "}
             </option>
-            <option value="meat">Meat</option>
-            <option value="veggie">Veggie</option>
-            <option value="carbohydrates">Carbs</option>
-            <option value="fruits">Fruits</option>
+            <option value="Meat">Meat</option>
+            <option value="Veggie">Veggie</option>
+            <option value="Carbohydrates">Carbs</option>
+            <option value="Fats">Fats</option>
             <option value="fast-food">Fast Food</option>
           </BrightInput>
           <div>
