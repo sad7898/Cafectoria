@@ -25,6 +25,7 @@ export const Header = styled.h1<
   {
     color?: string
     mg?: string
+    colorful?: boolean
   } & ResponsiveProps
 >`
   color: ${(props) => props.color};
@@ -35,6 +36,13 @@ export const Header = styled.h1<
   @media (min-width: 768px) {
     font-size: ${(props) => (props.sizeDesktop ? props.sizeDesktop : "3rem")} !important;
   }
+  ${(props) =>
+    props.colorful &&
+    `
+    transition: 0.3s;
+    &:hover {
+      color: var(--green-color);
+    }`}
 `
 export const SubHeader = styled.h3<{ color?: string } & ResponsiveProps>`
   color: ${(props) => props.color};
@@ -166,7 +174,7 @@ color: var(--grey-color);
 `
 export const StyledTag = styled(Badge)`
   background-color: var(--green-color);
-  margin-right: 0.5rem;
+  margin-left: 0.5rem;
   &:hover {
     background-color: #f56a79;
   }
@@ -192,7 +200,6 @@ export const CustomTag = (props: CustomTagProps) => {
   }
   return <StyledTag onClick={filterByTag}>{props.tag}</StyledTag>
 }
-
 export const StyledRow = styled.tr`
   & td:last-of-type {
     display: flex;
