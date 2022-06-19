@@ -1,7 +1,7 @@
 import "bootstrap"
 import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
-import React from "react"
+import React, { StrictMode } from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./style.css"
 import "./images/Quicksand/static/Quicksand-Medium.ttf"
@@ -19,11 +19,13 @@ if (!container) {
 }
 const root = createRoot(container)
 root.render(
-  <Provider store={store}>
-    <LoadingProvider>
-      <BrowserRouter>
-        <Bundle />
-      </BrowserRouter>
-    </LoadingProvider>
-  </Provider>
+  <StrictMode>
+    <Provider store={store}>
+      <LoadingProvider>
+        <BrowserRouter>
+          <Bundle />
+        </BrowserRouter>
+      </LoadingProvider>
+    </Provider>
+  </StrictMode>
 )

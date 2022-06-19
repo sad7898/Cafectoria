@@ -37,7 +37,7 @@ const ForumHead = () => {
   }
   return (
     <Wrapper>
-      <Header colorful color="var(--black-color)" className="mb-4" onClick={resetFilter}>
+      <Header colorful color="var(--black-color)" className="mb-4 unselectable" onClick={resetFilter}>
         Forum
       </Header>
       <Wrapper bg="transparent" rborder="10px" pd=".3rem .25rem .3rem .25rem" className="d-flex flex-row justify-content-between">

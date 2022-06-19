@@ -8,7 +8,10 @@ import useLoading from "../../contexts/loadingContext"
 import { PostProps } from "./post"
 import PostLink from "./postLink"
 import Refresh from "../../images/refresh.png"
-
+export interface BulkPostResponse {
+  posts: PostProps[]
+  count: number
+}
 export const ForumBrowser = () => {
   const { setLoading } = useLoading()
   const navigate = useNavigate()
@@ -30,25 +33,24 @@ export const ForumBrowser = () => {
       tags: searchParams.getAll("tags").length !== 0 ? searchParams.getAll("tags") : undefined,
       sortKey: searchParams.get("topic") ? "topic" : "created",
     }
-    await client.post(`/post/${page - 1}`, filter).then((res) => {
-      setMaxPage(Math.ceil(res.data.count / 10))
-      setPostList(res.data)
-      let nearestFiveFloor
-      if (page % 5 === 0 && page !== 1) nearestFiveFloor = page - 4
-      else nearestFiveFloor = 5 * Math.floor(page / 5) + 1
-      let nearestFiveCeil = 5 * Math.ceil(page / 5)
-      if (nearestFiveCeil > Math.ceil(res.data.count / 10)) nearestFiveCeil = Math.ceil(res.data.count / 10)
-      const arr = []
-      for (let i = nearestFiveFloor; i <= nearestFiveCeil; i++) {
-        arr.push(i)
-      }
-      setPageNav(arr)
-    })
+    const res = await client.post<BulkPostResponse>(`/post/${page - 1}`, filter)
+    setMaxPage(Math.ceil(res.data.count / 10))
+    setPostList(res.data.posts)
+    let nearestFiveFloor
+    if (page % 5 === 0 && page !== 1) nearestFiveFloor = page - 4
+    else nearestFiveFloor = 5 * Math.floor(page / 5) + 1
+    let nearestFiveCeil = 5 * Math.ceil(page / 5)
+    if (nearestFiveCeil > Math.ceil(res.data.count / 10)) nearestFiveCeil = Math.ceil(res.data.count / 10)
+    const arr = []
+    for (let i = nearestFiveFloor; i <= nearestFiveCeil; i++) {
+      arr.push(i)
+    }
+    setPageNav(arr)
     setLoading(false)
   }, [page, setLoading, searchParams])
   function jumpUp() {
-    const currentPage = page
-    setPageTransition(5 * Math.ceil(currentPage / 5) + 1)
+    const toPage = 5 * Math.ceil(page / 5) + 1
+    setPageTransition(toPage > maxPage ? maxPage : toPage)
   }
 
   function jumpDown() {
