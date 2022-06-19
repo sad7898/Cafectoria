@@ -14,7 +14,7 @@ export interface PostProps {
   author: {
     _id: string
     name: string
-  }
+  }[]
 }
 interface PostDataProps {
   topic: string

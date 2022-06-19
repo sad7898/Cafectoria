@@ -17,7 +17,7 @@ const PostLink = (props: PostLinkProps) => {
         })}
       </td>
       <td></td>
-      <td>{props.author.name}</td>
+      <td>{props.author[0].name}</td>
     </StyledRow>
   )
 }
