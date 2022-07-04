@@ -5,7 +5,8 @@ import { Wrapper } from "../../components/containers"
 import { StyledButton } from "../../components/button"
 import { client } from "../../axiosClient"
 import { useNavigate } from "react-router-dom"
-const PostForm = () => {
+import WithAuthGuard from "../../components/guards/withAuthGuard"
+const PostForm: React.FC<any> = () => {
   const navigate = useNavigate()
   const [text, setText] = useState("")
   const [topic, setTopic] = useState("")
@@ -86,4 +87,4 @@ const PostForm = () => {
     </Wrapper>
   )
 }
-export default PostForm
+export default WithAuthGuard(PostForm, "/login")

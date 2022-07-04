@@ -16,6 +16,7 @@ import ForumBody from "./forum/forumBody"
 import PostForm from "./forum/postForm"
 import Post from "./forum/post"
 import { ForumBrowser } from "./forum/forumBrowser"
+import PrivateRoute from "../components/guards/privateRoute"
 
 const Bundle = () => {
   const dispatch = useDispatch()

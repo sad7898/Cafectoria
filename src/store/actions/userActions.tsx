@@ -16,6 +16,7 @@ export const setCurrentUser = (payload: AuthPayload): CustomAction<AuthPayload> 
   }
 }
 export const LogOut = (): CustomAction<AuthPayload> => {
+  localStorage.setItem("token", "")
   return {
     type: "LOG_OUT",
     data: initialAuthState,
