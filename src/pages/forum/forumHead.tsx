@@ -34,6 +34,7 @@ const ForumHead = () => {
   const resetFilter = () => {
     setSearchParams({})
     setTopicQuery("")
+    navigate("/forum/main")
   }
   return (
     <Wrapper>

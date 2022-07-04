@@ -65,17 +65,17 @@ const Post = () => {
     loadContent()
   }, [id, setLoading, user])
   return (
-    <Wrapper bg="#dedede" rborder="10px" pd="1rem 1rem 1rem 1rem" mg="1rem auto auto auto">
-      {isAuthor ? (
-        <div className="d-flex flex-row justify-content-end">
+    <Wrapper bg="#dedede" rborder="10px" className="px-2" minh="200">
+      <div className="d-flex flex-row justify-content-between">
+        {isAuthor ? (
           <Button variant="danger" onClick={handleDel}>
             delete
           </Button>
-        </div>
-      ) : (
-        ""
-      )}
-      <Header>{postData?.topic}</Header>
+        ) : (
+          ""
+        )}
+        <Header>{postData?.topic}</Header>
+      </div>
       <Wrapper>{postData?.text}</Wrapper>
     </Wrapper>
   )
