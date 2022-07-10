@@ -8,6 +8,7 @@ import IntroText from "./landingIntro"
 import { Header, SubHeader } from "../../components/utilities"
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
+import { AuthStatus } from "../../store/actions/userActions"
 const Main = () => {
   const auth = useSelector((state: RootState) => state.auth)
   const [inProp, setInProp] = useState(false)
@@ -31,7 +32,7 @@ const Main = () => {
           <StyledButton bg="var(--white-color)" size="lg">
             Explore more
           </StyledButton>
-          {auth.isLogged ? (
+          {auth.status === AuthStatus.AUTH ? (
             <StyledButton bg="var(--white-color)" size="lg" onClick={() => navigate("/dashboard")}>
               Dashboard
             </StyledButton>

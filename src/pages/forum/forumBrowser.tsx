@@ -5,8 +5,8 @@ import { client } from "../../axiosClient"
 import { Wrapper } from "../../components/containers"
 import { StyledRow } from "../../components/utilities"
 import useLoading from "../../contexts/loadingContext"
-import { PostProps } from "./post"
-import PostLink from "./postLink"
+import { PostProps } from "../post/post"
+import PostLink from "../post/postLink"
 import Refresh from "../../images/refresh.png"
 export interface BulkPostResponse {
   posts: PostProps[]

@@ -4,10 +4,15 @@ export enum Role {
   user = "user",
   owner = "owner",
 }
+export enum AuthStatus {
+  PENDING,
+  AUTH,
+}
 export interface AuthPayload {
   name: string
   email: string
   roles: Role[]
+  status?: AuthStatus
 }
 export const setCurrentUser = (payload: AuthPayload): CustomAction<AuthPayload> => {
   return {

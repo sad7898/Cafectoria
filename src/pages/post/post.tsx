@@ -51,7 +51,9 @@ const Post = () => {
   const onClickEdit = () => {
     navigate(`edit`, {
       state: {
-        ...postData,
+        initialTopic: postData?.topic,
+        initialText: postData?.text,
+        initialTags: postData?.tags,
       },
     })
   }
@@ -80,10 +82,10 @@ const Post = () => {
         <Header>{postData?.topic}</Header>
 
         {isAuthor ? (
-          <>
-            <p onClick={handleDel}>delete</p>
-            <p onClick={onClickEdit}>edit</p>
-          </>
+          <div>
+            <span onClick={handleDel}>delete</span>
+            <span onClick={onClickEdit}>edit</span>
+          </div>
         ) : (
           ""
         )}

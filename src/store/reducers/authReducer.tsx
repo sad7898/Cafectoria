@@ -1,14 +1,11 @@
 import { CustomAction } from "../actions/types"
-import { AuthPayload } from "../actions/userActions"
+import { AuthPayload, AuthStatus } from "../actions/userActions"
 export enum Role {
   user = "user",
   owner = "owner",
 }
-export interface AuthState extends AuthPayload {
-  isLogged: boolean
-}
+export type AuthState = AuthPayload
 export const initialAuthState: AuthState = {
-  isLogged: false,
   name: "",
   email: "",
   roles: [],
@@ -20,7 +17,7 @@ export const authReducer = (state = initialAuthState, action: CustomAction<AuthP
         name: action.data.name,
         email: action.data.email,
         roles: action.data.roles,
-        isLogged: true,
+        status: action.data.status,
       }
     case "LOG_OUT":
       return initialAuthState

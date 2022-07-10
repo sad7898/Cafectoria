@@ -6,7 +6,7 @@ import Exit from "../../images/exit.svg"
 import Toggler from "../../images/hamburger.svg"
 import { CSSTransition } from "react-transition-group"
 import { useSelector, useDispatch } from "react-redux"
-import { LogOut } from "../../store/actions/userActions"
+import { AuthStatus, LogOut } from "../../store/actions/userActions"
 import { client } from "../../axiosClient"
 import useLoading from "../../contexts/loadingContext"
 import { RootState } from "../../store/store"
@@ -58,7 +58,7 @@ export const Sidebar = () => {
             </div>
             <ul className="sidebar-menu d-flex flex-column justify-content-between mt-3">
               <div>
-                {user.isLogged ? (
+                {user.status === AuthStatus.AUTH ? (
                   <>
                     <li>
                       <StyledNavLink to="/dashboard" size="16px">
@@ -73,7 +73,7 @@ export const Sidebar = () => {
               </div>
               <div className="w-100">
                 <li>
-                  {user.isLogged ? (
+                  {user.status === AuthStatus.AUTH ? (
                     <StyledNavLink to="/" onClick={handleLogOut}>
                       Sign Out
                     </StyledNavLink>
