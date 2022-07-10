@@ -4,7 +4,7 @@ import { Form, Formik } from "formik"
 import { InputField, StyledText, Header } from "../../components/utilities"
 import { Wrapper } from "../../components/containers"
 import { StyledButton } from "../../components/button"
-import { AuthPayload, setCurrentUser } from "../../store/actions/userActions"
+import { AuthPayload, AuthStatus, setCurrentUser } from "../../store/actions/userActions"
 import { useDispatch } from "react-redux"
 import { client } from "../../axiosClient"
 import useLoading from "../../contexts/loadingContext"
@@ -46,7 +46,7 @@ const LoginForm = () => {
               const { user } = data
               localStorage.setItem("token", data.token)
               setLoading(false)
-              dispatch(setCurrentUser({ name: user.name, email: user.email, roles: user.roles }))
+              dispatch(setCurrentUser({ name: user.name, email: user.email, roles: user.roles, status: AuthStatus.AUTH }))
               navigate("/")
             })
             .catch((err) => {

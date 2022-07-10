@@ -35,7 +35,7 @@ export const ForumBrowser = () => {
     }
     const res = await client.post<BulkPostResponse>(`/post/${page - 1}`, filter)
     setMaxPage(Math.ceil(res.data.count / 10))
-    setPostList(res.data.posts)
+    setPostList(res.data.posts ?? [])
     let nearestFiveFloor
     if (page % 5 === 0 && page !== 1) nearestFiveFloor = page - 4
     else nearestFiveFloor = 5 * Math.floor(page / 5) + 1

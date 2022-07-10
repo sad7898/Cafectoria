@@ -15,7 +15,6 @@ const DynamicBlock = styled(DecoratedBlock)`
   }
 `
 const Forum = () => {
-  const { pathname } = useLocation()
   return (
     <Container>
       <EyeLevel>

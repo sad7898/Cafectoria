@@ -1,6 +1,6 @@
 import { useState, startTransition, BaseSyntheticEvent } from "react"
 import { Wrapper } from "../../components/containers"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom"
 import { Header, StyledTag, BrightInput } from "../../components/utilities"
 import StyledNavLink from "../../components/nav/navLink"
 import styled from "styled-components"
@@ -24,9 +24,10 @@ const ForumHead = () => {
     topic: searchParams.get("topic") ?? "",
   }
   const onRemoveTags = (e: BaseSyntheticEvent<any, any, HTMLSpanElement>) => {
+    e.preventDefault()
     startTransition(() => {
       const newTags = searchParams.getAll("tags").filter((tag) => tag !== e.target.textContent)
-      setSearchParams({ ...searchParams, tags: newTags })
+      setSearchParams({ topic: searchParams.get("topic") ?? "", tags: newTags })
     })
   }
   const NewPostIcon = WithAuthGuard(() => (
@@ -38,6 +39,16 @@ const ForumHead = () => {
     setSearchParams({})
     setTopicQuery("")
     navigate("/forum/main")
+  }
+  const onSearch = () => {
+    setTopicQuery("")
+    navigate({
+      pathname: "/forum/main",
+      search: createSearchParams({
+        topic: topicQuery,
+        tags: filter.tags,
+      }).toString(),
+    })
   }
   return (
     <Wrapper>
@@ -52,14 +63,7 @@ const ForumHead = () => {
           <BrightInput className="" placeholder="Search anything. . ." value={topicQuery} onChange={(e: any) => setTopicQuery(e.target.value)} />
         </Wrapper>
         <Wrapper className="d-flex flex-row align-items-center justify-content-end ml-1">
-          <StyledButton
-            size="sm"
-            bg="var(--green-color)"
-            onClick={() => {
-              setSearchParams({ ...searchParams, topic: topicQuery })
-              setTopicQuery("")
-            }}
-          >
+          <StyledButton size="sm" bg="var(--green-color)" onClick={onSearch}>
             Find
           </StyledButton>
         </Wrapper>
@@ -70,18 +74,21 @@ const ForumHead = () => {
         </StyledNavLink>
       </StyledWrapper>
       <div className="px-1 py-1">
-        Tags:
-        {filter.tags.length > 0 ? (
-          filter.tags.map((val) => {
-            return (
-              <StyledTag key={val} onClick={onRemoveTags}>
-                {val}
-              </StyledTag>
-            )
-          })
-        ) : (
-          <StyledTag>None</StyledTag>
-        )}
+        <div>
+          Tags:
+          {filter.tags.length > 0 ? (
+            filter.tags.map((val) => {
+              return (
+                <StyledTag key={val} onClick={onRemoveTags}>
+                  {val}
+                </StyledTag>
+              )
+            })
+          ) : (
+            <StyledTag>None</StyledTag>
+          )}
+        </div>
+        {filter.topic && <div>Topic: {filter.topic}</div>}
       </div>
     </Wrapper>
   )
