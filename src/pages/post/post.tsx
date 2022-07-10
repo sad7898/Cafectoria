@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Wrapper } from "../../components/containers"
-import { Header } from "../../components/utilities"
+import { Header, StyledTag } from "../../components/utilities"
 import { Button } from "react-bootstrap"
 import useLoading from "../../contexts/loadingContext"
 import { useSelector } from "react-redux"
@@ -83,8 +83,8 @@ const Post = () => {
 
         {isAuthor ? (
           <div>
-            <span onClick={handleDel}>delete</span>
-            <span onClick={onClickEdit}>edit</span>
+            <StyledTag onClick={handleDel}>delete</StyledTag>
+            <StyledTag onClick={onClickEdit}>edit</StyledTag>
           </div>
         ) : (
           ""

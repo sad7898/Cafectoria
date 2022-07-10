@@ -1,4 +1,4 @@
-import React, { startTransition, useCallback, useEffect, useRef, useState } from "react"
+import { startTransition, useCallback, useEffect, useState } from "react"
 import { Table, Pagination } from "react-bootstrap"
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom"
 import { client } from "../../axiosClient"
@@ -7,7 +7,6 @@ import { StyledRow } from "../../components/utilities"
 import useLoading from "../../contexts/loadingContext"
 import { PostProps } from "../post/post"
 import PostLink from "../post/postLink"
-import Refresh from "../../images/refresh.png"
 export interface BulkPostResponse {
   posts: PostProps[]
   count: number

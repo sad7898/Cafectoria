@@ -172,11 +172,13 @@ transition: 0.3s;
     }
 color: var(--grey-color);
 `
-export const StyledTag = styled(Badge)`
+export const StyledTag = styled(Badge).attrs({
+  className:"unselectable"
+})<{ hoverColor: string }>`
   background-color: var(--green-color);
   margin-left: 0.5rem;
   &:hover {
-    background-color: #f56a79;
+    background-color: ${(props) => props.hoverColor ?? "#f56a79"};
   }
 `
 export const StyledList = styled.ul`
