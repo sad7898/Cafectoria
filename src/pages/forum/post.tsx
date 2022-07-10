@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { client } from "../../axiosClient"
 import { useNavigate, useParams } from "react-router-dom"
+import { PostFormInputs } from "./postForm"
 export interface PostProps {
   _id: string
   topic: string
@@ -19,6 +20,7 @@ export interface PostProps {
 interface PostDataProps {
   topic: string
   text: string
+  tags: string[]
 }
 interface PostDataResponse extends PostDataProps {
   author: {
@@ -46,6 +48,13 @@ const Post = () => {
       })
     setLoading(false)
   }
+  const onClickEdit = () => {
+    navigate(`edit`, {
+      state: {
+        ...postData,
+      },
+    })
+  }
   useEffect(() => {
     async function loadContent() {
       setLoading(true)
@@ -58,6 +67,7 @@ const Post = () => {
         setPostData({
           topic: res.data.topic,
           text: res.data.text,
+          tags: res.data.tags,
         })
       })
       setLoading(false)
@@ -67,14 +77,16 @@ const Post = () => {
   return (
     <Wrapper bg="#dedede" rborder="10px" className="px-2" minh="200">
       <div className="d-flex flex-row justify-content-between">
+        <Header>{postData?.topic}</Header>
+
         {isAuthor ? (
-          <Button variant="danger" onClick={handleDel}>
-            delete
-          </Button>
+          <>
+            <p onClick={handleDel}>delete</p>
+            <p onClick={onClickEdit}>edit</p>
+          </>
         ) : (
           ""
         )}
-        <Header>{postData?.topic}</Header>
       </div>
       <Wrapper>{postData?.text}</Wrapper>
     </Wrapper>

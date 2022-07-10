@@ -6,12 +6,22 @@ import { StyledButton } from "../../components/button"
 import { client } from "../../axiosClient"
 import { useNavigate } from "react-router-dom"
 import WithAuthGuard from "../../components/guards/withAuthGuard"
-const PostForm: React.FC<any> = () => {
-  const navigate = useNavigate()
-  const [text, setText] = useState("")
-  const [topic, setTopic] = useState("")
-  const [error, setError] = useState("")
-  const [tags, setTags] = useState<string[]>([])
+export interface PostFormInputs {
+  text?: string
+  tags: string[]
+  topic?: string
+}
+interface PostFormProps {
+  initialText?: string
+  initialTopic?: string
+  initialTags?: string[]
+  error?: string
+  handleSubmit: (values: PostFormInputs) => void
+}
+const PostForm: React.FC<PostFormProps> = ({ initialText, initialTags, initialTopic, handleSubmit, error }) => {
+  const [text, setText] = useState(initialText)
+  const [topic, setTopic] = useState(initialTopic)
+  const [tags, setTags] = useState<string[]>(initialTags ?? [])
   const onChangeText = (e: any) => {
     setText(e.target.value)
   }
@@ -30,61 +40,49 @@ const PostForm: React.FC<any> = () => {
     if (indx > -1) tempArr.splice(indx, 1)
     setTags(tempArr)
   }
-  async function handleSubmit() {
-    await client
-      .post("/post", { topic: topic, Text: text, tags: tags }, { withCredentials: true })
-      .then((res) => {
-        navigate("/forum")
-      })
-      .catch((err) => {
-        setError(err.response.data[Object.keys(err.response.data)[0]])
-      })
-  }
   return (
-    <Wrapper bg="#dedede" rborder="10px" pd="1rem 1rem 1rem 1rem" mg="1rem auto auto auto">
-      <Form>
-        <Form.Group controlId="topic">
-          <Form.Label>
-            <StyledText>Topic</StyledText>
-          </Form.Label>
-          <BrightInput type="text" placeholder="Enter Topic" name="topic" value={topic} onChange={onChangeTopic} required />
-        </Form.Group>
-        <Form.Group controlId="text" className="d-flex flex-column">
-          <Form.Label>
-            <StyledText>Content</StyledText>
-          </Form.Label>
-          <BrightInput type="text" beTextArea={true} rows={3} placeholder="Enter Text" name="text" value={text} onChange={onChangeText} required />
-        </Form.Group>
-        <Form.Group controlId="tags" className="d-flex flex-column">
-          <Form.Label>Select atleast one tag</Form.Label>
-          <BrightInput as="select" value={tags.length === 0 ? "empty" : tags[tags.length - 1]} onChange={onChangeTags}>
-            <option value="empty" style={{ display: tags.length === 0 ? "" : "none" }}>
-              {" "}
-            </option>
-            <option value="meat">Meat</option>
-            <option value="veggie">Veggie</option>
-            <option value="carbohydrates">Carbs</option>
-            <option value="fruits">Fruits</option>
-            <option value="fast-food">Fast Food</option>
-          </BrightInput>
-          <div>
-            {tags.map((val, indx) => {
-              return (
-                <StyledTag pill onClick={popTags} value={val} key={val}>
-                  {val}
-                </StyledTag>
-              )
-            })}
-          </div>
-        </Form.Group>
-        <div className="mt-2 mb-2">
-          <StyledText color="red">{error}</StyledText>
+    <Form>
+      <Form.Group controlId="topic">
+        <Form.Label>
+          <StyledText>Topic</StyledText>
+        </Form.Label>
+        <BrightInput type="text" placeholder="Enter Topic" name="topic" value={topic} onChange={onChangeTopic} required />
+      </Form.Group>
+      <Form.Group controlId="text" className="d-flex flex-column">
+        <Form.Label>
+          <StyledText>Content</StyledText>
+        </Form.Label>
+        <BrightInput type="text" beTextArea={true} rows={3} placeholder="Enter Text" name="text" value={text} onChange={onChangeText} required />
+      </Form.Group>
+      <Form.Group controlId="tags" className="d-flex flex-column">
+        <Form.Label>Select atleast one tag</Form.Label>
+        <BrightInput as="select" value={tags.length === 0 ? "empty" : tags[tags.length - 1]} onChange={onChangeTags}>
+          <option value="empty" style={{ display: tags.length === 0 ? "" : "none" }}>
+            {" "}
+          </option>
+          <option value="meat">Meat</option>
+          <option value="veggie">Veggie</option>
+          <option value="carbohydrates">Carbs</option>
+          <option value="fruits">Fruits</option>
+          <option value="fast-food">Fast Food</option>
+        </BrightInput>
+        <div>
+          {tags.map((val, indx) => {
+            return (
+              <StyledTag pill onClick={popTags} value={val} key={val}>
+                {val}
+              </StyledTag>
+            )
+          })}
         </div>
-        <StyledButton bg="var(--green-color)" onClick={handleSubmit}>
-          Submit
-        </StyledButton>
-      </Form>
-    </Wrapper>
+      </Form.Group>
+      <div className="mt-2 mb-2">
+        <StyledText color="red">{error}</StyledText>
+      </div>
+      <StyledButton bg="var(--green-color)" onClick={() => handleSubmit({ text, topic, tags })}>
+        Submit
+      </StyledButton>
+    </Form>
   )
 }
 export default WithAuthGuard(PostForm, "/login")

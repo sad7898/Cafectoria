@@ -79,8 +79,16 @@ export const ForumBrowser = () => {
           </StyledRow>
         </thead>
         <tbody>
-          {postList.map((val) => {
-            return <PostLink key={val._id} to={`${pathname}/${val._id}`} author={val.author} topic={val.topic} tags={val.tags}></PostLink>
+          {postList.map((val, indx) => {
+            return (
+              <PostLink
+                key={`post-${val.topic}-${indx}`}
+                to={`${pathname}/${val._id}`}
+                author={val.author}
+                topic={val.topic}
+                tags={val.tags}
+              ></PostLink>
+            )
           })}
         </tbody>
       </Table>

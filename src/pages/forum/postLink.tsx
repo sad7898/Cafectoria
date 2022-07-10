@@ -13,7 +13,7 @@ const PostLink = (props: PostLinkProps) => {
       </td>
       <td>
         {props.tags.map((val) => {
-          return <StyledTag>{val}</StyledTag>
+          return <StyledTag key={val}>{val}</StyledTag>
         })}
       </td>
       <td></td>

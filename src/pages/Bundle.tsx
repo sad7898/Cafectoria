@@ -17,6 +17,8 @@ import PostForm from "./forum/postForm"
 import Post from "./forum/post"
 import { ForumBrowser } from "./forum/forumBrowser"
 import PrivateRoute from "../components/guards/privateRoute"
+import { CreatePost } from "./forum/createPost"
+import { UpdatePost } from "./forum/updatePost"
 
 const Bundle = () => {
   const dispatch = useDispatch()
@@ -40,10 +42,11 @@ const Bundle = () => {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/forum" element={<Forum />}>
-            <Route path={`new`} element={<PostForm />}></Route>
+            <Route path={`new`} element={<CreatePost />}></Route>
             <Route path={`main`} element={<ForumBody />}>
               <Route path={""} element={<ForumBrowser />}></Route>
               <Route path={`:id`} element={<Post />}></Route>
+              <Route path={":id/edit"} element={<UpdatePost />}></Route>
             </Route>
             <Route path={`filter`} element={<Filter />}></Route>
           </Route>
