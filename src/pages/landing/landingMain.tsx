@@ -23,7 +23,7 @@ const Main = () => {
           <Wrapper className="w-100 d-flex flex-column align-items-center justify-content-center">
             <Header color="var(--white-color)">CAFETORIA</Header>
             <hr></hr>
-            <SubHeader color="var(--white-color)">Make your recipe</SubHeader>
+            <SubHeader color="var(--white-color)">Make your recipe GOOD</SubHeader>
           </Wrapper>
         </CSSTransition>
       </BSWrapper>
