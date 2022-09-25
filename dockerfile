@@ -9,12 +9,9 @@ WORKDIR /
 COPY . .
 RUN yarn build
 
-FROM node:16-alpine AS prod
-WORKDIR /app
+
+FROM nginx
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf 
 ENV NODE_ENV=production
-COPY --from=base package.json ./
-COPY --from=build /build ./build
-COPY --from=build /public ./public
-RUN npm install -g serve
-EXPOSE 3000
-CMD ["npx","serve","build"]
+WORKDIR /usr/share/nginx/html
+COPY --from=build /build .
