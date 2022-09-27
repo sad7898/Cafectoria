@@ -10,7 +10,7 @@ COPY . .
 RUN yarn build
 
 
-FROM nginx
+FROM nginx:alpine
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf 
 ENV NODE_ENV=production
 WORKDIR /usr/share/nginx/html
