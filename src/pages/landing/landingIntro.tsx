@@ -39,7 +39,7 @@ const IntroText = () => {
             Explore and share recipes
           </SubHeader>
           <SubHeader className="text-center" sizeMobile="1.4rem" sizeDesktop="1.5rem" color="var(--grey-color)">
-            What kind of food are people making?
+            Fry, Bake, Roast
           </SubHeader>
         </Wrapper>
         <Row>
