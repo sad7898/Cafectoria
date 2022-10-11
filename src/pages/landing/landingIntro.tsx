@@ -13,24 +13,6 @@ import { ChartData } from "react-chartjs-2"
 import { Modal } from "../modal/modal"
 
 const IntroText = () => {
-  const [pieData, setPieData] = useState<ChartData<any>>()
-  const fetchPie = useCallback(async () => {
-    await client.get("/pie").then((res) => {
-      const formatData: ChartData<any> = {
-        datasets: [
-          {
-            data: [res.data["meat"], res.data["veggie"], res.data["carbohydrates"], res.data["fruits"], res.data["fast-food"]],
-            backgroundColor: ["#ff7e67", "#7579e7", "#ffefa0", "#41aea9", "#f5a25d"],
-          },
-        ],
-        labels: ["Meat", "Veggie", "Carbs", "Fruits", "Fast Food"],
-      }
-      setPieData(formatData)
-    })
-  }, [])
-  useEffect(() => {
-    fetchPie()
-  }, [fetchPie])
   return (
     <>
       <Wrapper mg="10px auto 10px auto">
