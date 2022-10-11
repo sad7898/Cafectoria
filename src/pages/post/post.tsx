@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import { Wrapper } from "../../components/containers"
 import { Header, StyledTag } from "../../components/utilities"
 import { Button } from "react-bootstrap"
@@ -7,7 +7,10 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../store/store"
 import { client } from "../../axiosClient"
 import { useNavigate, useParams } from "react-router-dom"
+import { AiFillHeart } from "react-icons/ai"
 import { PostFormInputs } from "./postForm"
+import { LikeButton } from "./likeButton"
+import { AuthStatus } from "../../store/actions/userActions"
 export interface PostProps {
   _id: string
   topic: string
@@ -30,6 +33,7 @@ interface PostDataResponse extends PostDataProps {
 const Post = () => {
   const { setLoading } = useLoading()
   const [isAuthor, setAuthor] = useState(false)
+  const [isLiked, setIsLiked] = useState(false)
   const navigate = useNavigate()
   const [postData, setPostData] = useState<PostDataProps>()
   const user = useSelector((state: RootState) => state.auth)
@@ -57,25 +61,25 @@ const Post = () => {
       },
     })
   }
-  useEffect(() => {
-    async function loadContent() {
-      setLoading(true)
-      await client.get<PostDataResponse>(`/post/${id}`).then((res) => {
-        if (res.data.author.name === user.name) {
-          setAuthor(true)
-        } else {
-          setAuthor(false)
-        }
-        setPostData({
-          topic: res.data.topic,
-          text: res.data.text,
-          tags: res.data.tags,
-        })
+  const loadContent = useCallback(async () => {
+    setLoading(true)
+    await client.get<PostDataResponse>(`/post/${id}`).then((res) => {
+      if (res.data.author.name === user.name) {
+        setAuthor(true)
+      } else {
+        setAuthor(false)
+      }
+      setPostData({
+        topic: res.data.topic,
+        text: res.data.text,
+        tags: res.data.tags,
       })
-      setLoading(false)
-    }
+    })
+    setLoading(false)
+  }, [id, setLoading, user.name])
+  useEffect(() => {
     loadContent()
-  }, [id, setLoading, user])
+  }, [loadContent])
   return (
     <Wrapper bg="#dedede" rborder="10px" className="px-2" minh="200">
       <div className="d-flex flex-row justify-content-between">
@@ -87,7 +91,7 @@ const Post = () => {
             <StyledTag onClick={onClickEdit}>edit</StyledTag>
           </div>
         ) : (
-          ""
+          user.status === AuthStatus.AUTH && <LikeButton onClick={() => setIsLiked((prev) => !prev)} isLiked={isLiked}></LikeButton>
         )}
       </div>
       <Wrapper>{postData?.text}</Wrapper>
