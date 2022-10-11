@@ -1,4 +1,4 @@
-import { startTransition, useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { Table, Pagination } from "react-bootstrap"
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom"
 import { client } from "../../axiosClient"
@@ -11,27 +11,22 @@ export interface BulkPostResponse {
   posts: PostProps[]
   count: number
 }
-export const ForumBrowser = () => {
+const ForumBrowser = () => {
   const { setLoading } = useLoading()
   const navigate = useNavigate()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const { pathname } = useLocation()
   const [page, setPage] = useState(1)
   const [maxPage, setMaxPage] = useState(1)
   const [pageNav, setPageNav] = useState([1])
   const [postList, setPostList] = useState<PostProps[]>([])
-  const setPageTransition = (page: number) => {
-    startTransition(() => {
-      setPage(page)
-    })
-  }
   const loadContent = useCallback(async () => {
-    setLoading(true)
     const filter = {
       topic: searchParams.get("topic"),
       tags: searchParams.getAll("tags").length !== 0 ? searchParams.getAll("tags") : undefined,
       sortKey: searchParams.get("topic") ? "topic" : "created",
     }
+    setLoading(true)
     const res = await client.post<BulkPostResponse>(`/post/${page - 1}`, filter)
     setMaxPage(Math.ceil(res.data.count / 10))
     setPostList(res.data.posts ?? [])
@@ -46,22 +41,22 @@ export const ForumBrowser = () => {
     }
     setPageNav(arr)
     setLoading(false)
-  }, [page, setLoading, searchParams])
+  }, [page, searchParams])
   function jumpUp() {
     const toPage = 5 * Math.ceil(page / 5) + 1
-    setPageTransition(toPage > maxPage ? maxPage : toPage)
+    setPage(toPage > maxPage ? maxPage : toPage)
   }
 
   function jumpDown() {
     const currentPage = page
     if (currentPage % 5 === 0) {
-      setPageTransition(5 * (Math.floor(currentPage / 5) - 1))
+      setPage(5 * (Math.floor(currentPage / 5) - 1))
     } else {
-      setPageTransition(5 * Math.floor(currentPage / 5))
+      setPage(5 * Math.floor(currentPage / 5))
     }
   }
   useEffect(() => {
-    setPageTransition(1)
+    setPage(1)
   }, [searchParams])
   useEffect(() => {
     loadContent()
@@ -93,7 +88,7 @@ export const ForumBrowser = () => {
       </Table>
       <Wrapper className="d-flex flex-row justify-content-center">
         <Pagination>
-          <Pagination.First onClick={() => setPageTransition(1)}></Pagination.First>
+          <Pagination.First onClick={() => setPage(1)}></Pagination.First>
           {page <= 5 ? "" : <Pagination.Ellipsis onClick={jumpDown} />}
           {pageNav.map((val, indx) => {
             return (
@@ -101,7 +96,7 @@ export const ForumBrowser = () => {
                 active={page === val}
                 key={`item-${indx}`}
                 onClick={() => {
-                  setPageTransition(val)
+                  setPage(val)
                 }}
               >
                 {val}
@@ -114,3 +109,4 @@ export const ForumBrowser = () => {
     </>
   )
 }
+export default ForumBrowser

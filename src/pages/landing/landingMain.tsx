@@ -29,7 +29,7 @@ const Main = () => {
       </BSWrapper>
       <BSWrapper>
         <div className="d-flex flex-row justify-content-between w-100">
-          <StyledButton bg="var(--white-color)" size="lg">
+          <StyledButton bg="var(--white-color)" size="lg" onClick={() => navigate("/forum/main")}>
             Explore more
           </StyledButton>
           {auth.status === AuthStatus.AUTH ? (
