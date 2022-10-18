@@ -3,6 +3,7 @@ import { Table, Pagination } from "react-bootstrap"
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom"
 import { client } from "../../axiosClient"
 import { Wrapper } from "../../components/containers"
+import { PostTable } from "../../components/postTable"
 import { StyledRow } from "../../components/utilities"
 import useLoading from "../../contexts/loadingContext"
 import { PostProps } from "../post/post"
@@ -63,29 +64,7 @@ const ForumBrowser = () => {
   }, [loadContent])
   return (
     <>
-      <Table striped borderless hover>
-        <thead>
-          <StyledRow>
-            <th colSpan={3}>Topics</th>
-            <th></th>
-            <th></th>
-            <th className="d-flex flex-row justify-content-end">Author</th>
-          </StyledRow>
-        </thead>
-        <tbody>
-          {postList.map((val, indx) => {
-            return (
-              <PostLink
-                key={`post-${val.topic}-${indx}`}
-                to={`${pathname}/${val._id}`}
-                author={val.author}
-                topic={val.topic}
-                tags={val.tags}
-              ></PostLink>
-            )
-          })}
-        </tbody>
-      </Table>
+      <PostTable posts={postList} />
       <Wrapper className="d-flex flex-row justify-content-center">
         <Pagination>
           <Pagination.First onClick={() => setPage(1)}></Pagination.First>
