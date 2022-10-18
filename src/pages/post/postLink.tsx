@@ -8,7 +8,7 @@ interface PostLinkProps extends Omit<PostProps, "_id"> {
 const PostLink = (props: PostLinkProps) => {
   return (
     <StyledRow>
-      <td colSpan={3}>
+      <td colSpan={3} style={{ maxWidth: "100px", overflowX: "hidden", textOverflow: "ellipsis" }}>
         <Link to={props.to}>{props.topic}</Link>
       </td>
       <td>
@@ -17,7 +17,7 @@ const PostLink = (props: PostLinkProps) => {
         })}
       </td>
       <td></td>
-      <td>{props.author[0].name}</td>
+      <td style={{ maxWidth: "90px" }}>{props.author[0].name}</td>
     </StyledRow>
   )
 }

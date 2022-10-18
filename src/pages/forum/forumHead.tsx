@@ -58,11 +58,11 @@ const ForumHead = () => {
         </Header>
         <NewPostIcon />
       </div>
-      <Wrapper bg="transparent" rborder="10px" pd=".3rem .25rem .3rem .25rem" className="d-flex flex-row justify-content-between">
-        <Wrapper className="my-auto w-100">
+      <Wrapper bg="transparent" rborder="10px" pd=".3rem .25rem .3rem .25rem" className="d-flex flex-row">
+        <Wrapper className="my-auto">
           <BrightInput className="" placeholder="Search anything. . ." value={topicQuery} onChange={(e: any) => setTopicQuery(e.target.value)} />
         </Wrapper>
-        <Wrapper className="d-flex flex-row align-items-center justify-content-end ml-1">
+        <Wrapper width="x" className="ml-1">
           <StyledButton size="sm" bg="var(--green-color)" onClick={onSearch}>
             Find
           </StyledButton>

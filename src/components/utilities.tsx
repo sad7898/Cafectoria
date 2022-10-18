@@ -173,7 +173,7 @@ transition: 0.3s;
 color: var(--grey-color);
 `
 export const StyledTag = styled(Badge).attrs({
-  className:"unselectable"
+  className: "unselectable",
 })<{ hoverColor: string }>`
   background-color: var(--green-color);
   margin-left: 0.5rem;
@@ -203,6 +203,7 @@ export const CustomTag = (props: CustomTagProps) => {
   return <StyledTag onClick={filterByTag}>{props.tag}</StyledTag>
 }
 export const StyledRow = styled.tr`
+  overflow-x: scroll;
   & td:last-of-type {
     display: flex;
     flex-direction: row;
