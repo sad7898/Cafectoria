@@ -97,3 +97,7 @@ export const DynamicBlock = styled(DecoratedBlock)`
     box-shadow: 0 0 0;
   }
 `
+export const Scrollable = styled(Wrapper)`
+  max-height: 300px;
+  overflow-y: scroll;
+`

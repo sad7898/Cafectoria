@@ -34,13 +34,16 @@ export const Sidebar = () => {
       })
     setLoading(false)
   }
-  const listItems = data.map((item, index) => (
-    <li key={index}>
-      <StyledNavLink to={item.path} onClick={() => setInProp(false)}>
-        {item.name}
-      </StyledNavLink>
-    </li>
-  ))
+  const listItems = data.map((item, index) => {
+    if (item.shouldBeAuth && user.status !== AuthStatus.AUTH) return null
+    return (
+      <li key={index}>
+        <StyledNavLink to={item.path} onClick={() => setInProp(false)}>
+          {item.name}
+        </StyledNavLink>
+      </li>
+    )
+  })
   return (
     <>
       <div className="sidebar-toggler d-flex flex-row justify-content-center">

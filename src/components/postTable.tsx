@@ -15,7 +15,7 @@ export const PostTable = ({ posts }: PostTableProps) => {
           <th colSpan={3}>Topics</th>
           <th></th>
           <th></th>
-          <th className="d-flex flex-row justify-content-end">Author</th>
+          <th>Author</th>
         </StyledRow>
       </thead>
       <tbody>
@@ -23,7 +23,7 @@ export const PostTable = ({ posts }: PostTableProps) => {
           return (
             <PostLink
               key={`post-${post.topic}-${indx}`}
-              to={`forum/main/${post._id}`}
+              to={`/forum/main/${post._id}`}
               author={post.author}
               topic={post.topic}
               tags={post.tags}
