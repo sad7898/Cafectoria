@@ -9,13 +9,13 @@ export const initialAuthState: AuthState = {
   name: "",
   email: "",
   roles: [],
+  status: undefined,
 } as AuthState
 export const authReducer = (state = initialAuthState, action: CustomAction<AuthPayload>): AuthState => {
   switch (action.type) {
     case "SET_CURRENT_USER":
       return {
         name: action.data.name,
-        email: action.data.email,
         roles: action.data.roles,
         status: action.data.status,
       }

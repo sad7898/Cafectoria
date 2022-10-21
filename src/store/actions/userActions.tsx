@@ -10,7 +10,6 @@ export enum AuthStatus {
 }
 export interface AuthPayload {
   name: string
-  email: string
   roles: Role[]
   status?: AuthStatus
 }
