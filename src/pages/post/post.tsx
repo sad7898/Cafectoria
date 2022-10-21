@@ -64,6 +64,7 @@ const Post = () => {
   const loadContent = useCallback(async () => {
     setLoading(true)
     await client.get<PostDataResponse>(`/post/${id}`).then((res) => {
+      console.log(res.data)
       if (res.data.author.name === user.name) {
         setAuthor(true)
       } else {
