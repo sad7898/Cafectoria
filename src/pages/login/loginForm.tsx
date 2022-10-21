@@ -46,7 +46,7 @@ const LoginForm = () => {
               const { user } = data
               localStorage.setItem("token", data.token)
               setLoading(false)
-              dispatch(setCurrentUser({ name: user.name, email: user.email, roles: user.roles, status: AuthStatus.AUTH }))
+              dispatch(setCurrentUser({ name: user.name, roles: user.roles, status: AuthStatus.AUTH }))
               navigate("/")
             })
             .catch((err) => {
