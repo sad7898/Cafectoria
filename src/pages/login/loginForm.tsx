@@ -51,7 +51,7 @@ const LoginForm = () => {
             })
             .catch((err) => {
               setLoading(false)
-              setError(err.response.data[Object.keys(err.response.data)[0]])
+              setError(err.response.data['message'])
             })
           setSubmitting(false)
         }}

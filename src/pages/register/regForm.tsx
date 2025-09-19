@@ -67,7 +67,7 @@ const Reg = ({ secret }: RegProps) => {
               navigate("/login")
             })
             .catch((err) => {
-              setError(err.response ? err.response.data[Object.keys(err.response.data)[0]] : "Cannot connect to remote server. Please try again")
+              setError(err.response ? err.response.data['message'] : "Cannot connect to remote server. Please try again")
               setLoading(false)
             })
           setLoading(false)
