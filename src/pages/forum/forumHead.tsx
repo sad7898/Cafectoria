@@ -7,6 +7,9 @@ import styled from "styled-components"
 import { StyledButton } from "../../components/button"
 import { AiFillPlusSquare } from "react-icons/ai"
 import WithAuthGuard from "../../components/guards/withAuthGuard"
+import { useSelector } from "react-redux"
+import { RootState } from "../../store/store"
+import { AuthStatus } from "../../store/actions/userActions"
 const StyledWrapper = styled(Wrapper)`
   border-right: 0;
 `
@@ -16,7 +19,7 @@ interface Filter {
 }
 const ForumHead = () => {
   const navigate = useNavigate()
-
+  const user = useSelector((state: RootState) => state.auth)
   const [searchParams, setSearchParams] = useSearchParams()
   const [topicQuery, setTopicQuery] = useState("")
   const filter: Filter = {
@@ -30,11 +33,7 @@ const ForumHead = () => {
       setSearchParams({ topic: searchParams.get("topic") ?? "", tags: newTags })
     })
   }
-  const NewPostIcon = WithAuthGuard(() => (
-    <div className="d-flex flex-column justify-content-center mb-4">
-      <AiFillPlusSquare size={35} onClick={() => navigate("/forum/new")}></AiFillPlusSquare>
-    </div>
-  ))
+
   const resetFilter = () => {
     setSearchParams({})
     setTopicQuery("")
@@ -56,7 +55,10 @@ const ForumHead = () => {
         <Header colorful color="var(--black-color)" className="mb-4 unselectable">
           <span onClick={resetFilter}>Forum</span>
         </Header>
-        <NewPostIcon />
+        {user.status === AuthStatus.AUTH ? 
+        <div className="d-flex flex-column justify-content-center mb-4">
+          <AiFillPlusSquare size={35} onClick={() => navigate("/forum/new")}></AiFillPlusSquare>
+        </div>  : null }
       </div>
       <Wrapper bg="transparent" rborder="10px" pd=".3rem .25rem .3rem .25rem" className="d-flex flex-row">
         <Wrapper className="my-auto">
