@@ -64,7 +64,7 @@ export const Sidebar = () => {
                 {user.status === AuthStatus.AUTH ? (
                   <>
                     <li>
-                      <StyledNavLink to="/dashboard" size="16px">
+                      <StyledNavLink to="/user/dashboard" size="16px" onClick={() => setInProp(false)}>
                         Welcome {user.name}
                       </StyledNavLink>
                     </li>
